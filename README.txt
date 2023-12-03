@@ -33,7 +33,6 @@ side categories:
 Deadline: 31.01.2024 23:59
 
 Reminder:
-
 - Android Material Design muss genutzt werden.
 - No external libraries except what we discussed in the lecture, implement it yourself
 - No cloud databases.
