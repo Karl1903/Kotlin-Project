@@ -1,18 +1,34 @@
 
 Description 2-6 sentences:
 
-...
+The Android Application that the project team 
+seeks to develop targets a weather API, gets data and parses the data.
+The user of the application can type in the Location,
+Then presses the button "show weather", finally receives data 
+for it for example 2 to 3 weeks into the future.
+
+Then, in the start menu of the appliaction, 
+the user can see his recent searches
+in a list (local storage), each row shows a minimum of data
+like "Barcelona, appr. 23 Degrees Celcius". 
+So if the user clicks a row, he gets the 
+complete data again for the week and weather.
+If the user wants to delete a row, he can do that with 
+the click on the "X"-Button, right side.
 
 Team: Sarah Föll, Clemens Feth.
 
-two categories which you will implement in the app:
+two categories that we implement in the app:
 
-- Media and Camera	      ---> Take picture, load image from gallery
-- Location and Sensors	  ---> GPS, Gyroscope, Motion, Barometer, Altimeter
-- Data Storage	          ---> Store app local data using SQL, Key/Value
-- Networking	            ---> Consume API, Parse JSON, XML, GraphQL
-- Connectivity	          ---> Bluetooth, Wifi, Beacons
-- Animation and Graphics	---> Implement charts, complex animations
+- Data Storage	          ---> Store app local data using SQL, Key/Value.
+- Networking	            ---> Consume API, Parse JSON, XML, GraphQL.
+
+side categories:
+
+- Media and Camera	      ---> Take picture, load image from gallery.
+- Location and Sensors	  ---> GPS, Gyroscope, Motion, Barometer, Altimeter.
+- Connectivity	          ---> Bluetooth, Wifi, Beacons.
+- Animation and Graphics	---> Implement charts, complex animations.
 
 Deadline: 31.01.2024 23:59
 
