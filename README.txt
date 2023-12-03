@@ -4,8 +4,8 @@ Description 2-6 sentences:
 The Android Application that the project team 
 seeks to develop targets a weather API, gets data and parses the data.
 The user of the application can type in the Location,
-Then presses the button "show weather", finally receives data 
-for it for example 2 to 3 weeks into the future.
+Then presses the button "show weather", 
+finally gets data for it for example 2 to 3 weeks to the future.
 
 Then, in the start menu of the appliaction, 
 the user can see his recent searches
