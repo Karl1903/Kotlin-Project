@@ -8,7 +8,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/searchFragmentContainer"
-        android:name="de.hdmstuttgart.movietracker.search.SearchFragment"
+        android:name="de.hdmstuttgart.wetter.search.SearchFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

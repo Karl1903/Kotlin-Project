@@ -1,4 +1,4 @@
-package de.hdmstuttgart.movietracker
+package de.hdmstuttgart.wetter
 
 import android.os.Bundle
 import android.view.View
@@ -7,7 +7,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import de.hdmstuttgart.movietracker.Weather.Weather
+import de.hdmstuttgart.wetter.R
+import de.hdmstuttgart.wetter.Weather.Weather
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

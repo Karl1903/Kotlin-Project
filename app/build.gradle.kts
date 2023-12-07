@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "de.hdmstuttgart.movietracker"
+    namespace = "de.hdmstuttgart.wetter"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "de.hdmstuttgart.movietracker"
+        applicationId = "de.hdmstuttgart.wetter"
         minSdk = 26
         targetSdk = 34
         versionCode = 1

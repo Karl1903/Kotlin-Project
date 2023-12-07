@@ -1,10 +1,11 @@
-package de.hdmstuttgart.movietracker
+package de.hdmstuttgart.wetter
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import de.hdmstuttgart.movietracker.Search.SearchActivity
+import de.hdmstuttgart.wetter.R
+import de.hdmstuttgart.wetter.Search.SearchActivity
 class MainActivity : AppCompatActivity() {
 
 

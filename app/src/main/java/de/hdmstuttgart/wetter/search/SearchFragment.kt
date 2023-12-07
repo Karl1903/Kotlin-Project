@@ -1,4 +1,4 @@
-package de.hdmstuttgart.movietracker.Search
+package de.hdmstuttgart.wetter.Search
 
 import android.os.Bundle
 import android.view.View
@@ -9,11 +9,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import de.hdmstuttgart.movietracker.R
-import de.hdmstuttgart.movietracker.Weather.Weather
-import de.hdmstuttgart.movietracker.WeatherAdapter
-import de.hdmstuttgart.movietracker.WeatherCLickListener
-import de.hdmstuttgart.movietracker.WeatherTrackerApplication
+import de.hdmstuttgart.wetter.R
+import de.hdmstuttgart.wetter.Weather.Weather
+import de.hdmstuttgart.wetter.WeatherAdapter
+import de.hdmstuttgart.wetter.WeatherCLickListener
+import de.hdmstuttgart.wetter.WeatherTrackerApplication
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -39,10 +39,10 @@ class SearchFragment : Fragment(R.layout.fragment_search), WeatherCLickListener 
         recyclerView.adapter = adapter
 
         //Set the search Button so the User can Search for a Film.
-        val searchTitleButton = view.findViewById<Button>(R.id.searchMovieTitleButton)
+        val searchTitleButton = view.findViewById<Button>(R.id.searchWeatherTitleButton)
         searchTitleButton.setOnClickListener{
             //Get the text from the User, he gives the Title.
-            val searchTitleTextEditText = view.findViewById<EditText>(R.id.searchMovieTitleEditText)
+            val searchTitleTextEditText = view.findViewById<EditText>(R.id.searchWeatherTitleEditText)
             val searchTitleText = searchTitleTextEditText.text.toString()
 
             searchMovies(searchTitleText)

@@ -1,4 +1,4 @@
-package de.hdmstuttgart.movietracker.Weather
+package de.hdmstuttgart.wetter.Weather
 
 import com.google.gson.annotations.SerializedName
 

@@ -1,8 +1,8 @@
-package de.hdmstuttgart.movietracker.Search
+package de.hdmstuttgart.wetter.Search
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import de.hdmstuttgart.movietracker.R
+import de.hdmstuttgart.wetter.R
 
 class SearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

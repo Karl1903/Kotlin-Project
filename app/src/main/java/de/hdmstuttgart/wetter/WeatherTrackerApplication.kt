@@ -1,9 +1,9 @@
-package de.hdmstuttgart.movietracker
+package de.hdmstuttgart.wetter
 
 import android.app.Application
-import de.hdmstuttgart.movietracker.API.WeatherApi
-import de.hdmstuttgart.movietracker.Movie.WeatherDatabase
-import de.hdmstuttgart.movietracker.Weather.WeatherRepository
+import de.hdmstuttgart.wetter.API.WeatherApi
+import de.hdmstuttgart.wetter.Weather.WeatherDatabase
+import de.hdmstuttgart.wetter.Weather.WeatherRepository
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 

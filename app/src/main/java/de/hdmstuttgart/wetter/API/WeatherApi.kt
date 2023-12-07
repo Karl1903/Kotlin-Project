@@ -1,4 +1,4 @@
-package de.hdmstuttgart.movietracker.API
+package de.hdmstuttgart.wetter.API
 
 import retrofit2.http.GET
 import retrofit2.http.Query

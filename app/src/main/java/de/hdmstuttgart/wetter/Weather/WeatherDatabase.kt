@@ -1,11 +1,9 @@
-package de.hdmstuttgart.movietracker.Movie
+package de.hdmstuttgart.wetter.Weather
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import de.hdmstuttgart.movietracker.Weather.Weather
-import de.hdmstuttgart.movietracker.Weather.WeatherDao
 
 
 @Database(entities = [Weather::class], version = 2, exportSchema = false)

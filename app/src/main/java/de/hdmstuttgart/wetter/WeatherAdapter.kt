@@ -1,4 +1,4 @@
-package de.hdmstuttgart.movietracker
+package de.hdmstuttgart.wetter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import de.hdmstuttgart.movietracker.Weather.Weather
+import de.hdmstuttgart.wetter.R
+import de.hdmstuttgart.wetter.Weather.Weather
 
 interface WeatherCLickListener {
 

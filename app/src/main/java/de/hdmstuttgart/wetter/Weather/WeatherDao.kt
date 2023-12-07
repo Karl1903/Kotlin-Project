@@ -1,4 +1,4 @@
-package de.hdmstuttgart.movietracker.Weather
+package de.hdmstuttgart.wetter.Weather
 
 import androidx.room.Dao
 import androidx.room.Delete
