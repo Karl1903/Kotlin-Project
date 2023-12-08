@@ -77,6 +77,8 @@ class SearchFragment : Fragment(R.layout.fragment_search), WeatherCLickListener 
 
     //the towns are searched with the text provided from the user.
     //Then, the found town names are saved into the data-Array.
+
+    //Todo: prüfen, was für daten die wetter api sendet. wert von town.
     private fun searchTowns(searchTitleText: String) {
 
         activity?.let { it ->
