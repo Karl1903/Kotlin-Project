@@ -1,0 +1,20 @@
+package de.hdmstuttgart.wetter.Town
+
+import com.google.gson.annotations.SerializedName
+
+//todo: change data structure to: Name from the towns clicked.
+/**The data structure to provide the data for the saved towns in the Main Activity list.
+ * The name of the town, the description of the trend the weather is takin ("rainy", "sunny")
+ * and the temperature trend in Celcius degrees.
+ *
+ * */
+data class TownDTO (
+    @SerializedName("Town-ID") val townID: String,
+    @SerializedName("Town") val town: String,
+    @SerializedName("Trend-Description") val description: String,
+    @SerializedName("Trend-Degrees") val degrees: String,
+){
+    fun toDomain(): Town{
+        return Town(townID = townID, town = town, description = description, degrees = degrees)
+    }
+}

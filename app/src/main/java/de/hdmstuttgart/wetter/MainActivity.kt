@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     //Navigates to the Search Activity.
-    fun onSearchWeatherClick(view: View){
+    fun onSearchTownClick(view: View){
         val intent = Intent(this, SearchActivity::class.java)
         startActivity(intent)
     }
