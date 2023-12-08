@@ -10,11 +10,11 @@ import com.google.gson.annotations.SerializedName
  * */
 data class TownDTO (
     @SerializedName("Town-ID") val townID: String,
-    @SerializedName("Town") val town: String,
+    @SerializedName("Name") val name: String,
     @SerializedName("Trend-Description") val description: String,
     @SerializedName("Trend-Degrees") val degrees: String,
 ){
     fun toDomain(): Town{
-        return Town(townID = townID, town = town, description = description, degrees = degrees)
+        return Town(townID = townID, name = name, description = description, degrees = degrees)
     }
 }
