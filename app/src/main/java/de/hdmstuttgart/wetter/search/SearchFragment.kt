@@ -10,10 +10,11 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.hdmstuttgart.wetter.R
-import de.hdmstuttgart.wetter.Weather.Weather
-import de.hdmstuttgart.wetter.WeatherAdapter
-import de.hdmstuttgart.wetter.WeatherCLickListener
-import de.hdmstuttgart.wetter.WeatherTrackerApplication
+import de.hdmstuttgart.wetter.Town.Town
+import de.hdmstuttgart.wetter.TownAdapter
+import de.hdmstuttgart.wetter.TownCLickListener
+import de.hdmstuttgart.wetter.TownTrackerApplication
+import de.hdmstuttgart.wetter.Town.TownRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -22,11 +23,11 @@ import kotlinx.coroutines.withContext
  * Then, the user can click on the button with the text "Search Town".
  *  */
 
-class SearchFragment : Fragment(R.layout.fragment_search), WeatherCLickListener {
+class SearchFragment : Fragment(R.layout.fragment_search), TownCLickListener {
 
-    private val data = ArrayList<Weather>()
+    private val data = ArrayList<Town>()
 
-    private val adapter = WeatherAdapter(data, this)
+    private val adapter = TownAdapter(data, this)
 
     //Town(-weather) search with town-name and button click.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,15 +59,15 @@ class SearchFragment : Fragment(R.layout.fragment_search), WeatherCLickListener 
     //The purpose of this is that the user has the list with the recent searches he did in the
     //Main Activity , Application Start. So he can access the weather data for his/her favorite towns
     // fast without the need to write the town name again.
-    override fun onWeatherClickListener(position: Int) {
+    override fun onTownClickListener(position: Int) {
         val town = data.get(position)
 
         activity?.let {
             val fragmentActivity = it
-            val weatherTrackerApplication = fragmentActivity.application as WeatherTrackerApplication
+            val townTrackerApplication = fragmentActivity.application as TownTrackerApplication
 
             lifecycleScope.launch (Dispatchers.IO ){
-                weatherTrackerApplication.repository.insert(town)
+                townTrackerApplication.repository.insert(town)
 
                 withContext(Dispatchers.Main){
                     fragmentActivity.finish()
@@ -82,10 +83,10 @@ class SearchFragment : Fragment(R.layout.fragment_search), WeatherCLickListener 
     private fun searchTowns(searchTitleText: String) {
 
         activity?.let { it ->
-            val weatherTrackerApplication = it.application as WeatherTrackerApplication
+            val townTrackerApplication = it.application as TownTrackerApplication
 
             lifecycleScope.launch(Dispatchers.IO) {
-                val payload = weatherTrackerApplication.weatherApi.getSearchResult(searchTitleText, "7cb19ac6")
+                val payload = townTrackerApplication.weatherApi.getSearchResult(searchTitleText, "7cb19ac6")
                 data.clear()
 
                 val towns = payload.search.map { return@map it.toDomain()}

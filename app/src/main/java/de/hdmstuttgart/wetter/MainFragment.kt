@@ -7,18 +7,17 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import de.hdmstuttgart.wetter.R
-import de.hdmstuttgart.wetter.Weather.Weather
+import de.hdmstuttgart.wetter.Town.Town
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class MainFragment : Fragment(R.layout.fragment_main), WeatherCLickListener {
+class MainFragment : Fragment(R.layout.fragment_main), TownCLickListener {
 
-    private val data = ArrayList<Weather>()
+    private val data = ArrayList<Town>()
 
-    private val adapter = WeatherAdapter(data, this)
+    private val adapter = TownAdapter(data, this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -38,11 +37,11 @@ class MainFragment : Fragment(R.layout.fragment_main), WeatherCLickListener {
     private fun update() {
         activity?.let {
             val fragmentActivity = it
-            val weatherTrackerApplication = fragmentActivity.application as WeatherTrackerApplication
+            val townTrackerApplication = fragmentActivity.application as TownTrackerApplication
 
             lifecycleScope.launch(Dispatchers.IO) {
                 data.clear()
-                data.addAll(weatherTrackerApplication.repository.getAllWeathers())
+                data.addAll(townTrackerApplication.repository.getTowns())
 
                 withContext(Dispatchers.Main){
                     adapter.notifyDataSetChanged()
@@ -56,15 +55,15 @@ class MainFragment : Fragment(R.layout.fragment_main), WeatherCLickListener {
         update()
     }
 
-    override fun onWeatherClickListener(position: Int) {
-        val weather = data[position]
+    override fun onTownClickListener(position: Int) {
+        val town = data[position]
 
         activity?.let {
             val fragmentActivity = it
-            val weatherTrackerApplication = fragmentActivity.application as WeatherTrackerApplication
+            val townTrackerApplication = fragmentActivity.application as TownTrackerApplication
 
             lifecycleScope.launch (Dispatchers.IO ){
-                weatherTrackerApplication.repository.delete(weather)
+                townTrackerApplication.repository.delete(town)
 
                 withContext(Dispatchers.Main){
                     update()
