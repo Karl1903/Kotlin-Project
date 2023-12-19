@@ -55,6 +55,8 @@ class MainFragment : Fragment(R.layout.fragment_main), TownCLickListener {
         update()
     }
 
+
+
     override fun onTownClickListener(position: Int) {
         val town = data[position]
 

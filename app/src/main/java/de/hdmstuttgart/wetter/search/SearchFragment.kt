@@ -14,7 +14,6 @@ import de.hdmstuttgart.wetter.Town.Town
 import de.hdmstuttgart.wetter.TownAdapter
 import de.hdmstuttgart.wetter.TownCLickListener
 import de.hdmstuttgart.wetter.TownTrackerApplication
-import de.hdmstuttgart.wetter.Town.TownRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -86,7 +85,7 @@ class SearchFragment : Fragment(R.layout.fragment_search), TownCLickListener {
             val townTrackerApplication = it.application as TownTrackerApplication
 
             lifecycleScope.launch(Dispatchers.IO) {
-                val payload = townTrackerApplication.weatherApi.getSearchResult(searchTitleText, "7cb19ac6")
+                val payload = townTrackerApplication.weatherApi.getSearchResult(searchTitleText, "cc5ef9e3576dc1e8bc30087dae5ee9ca")
                 data.clear()
 
                 val towns = payload.search.map { return@map it.toDomain()}

@@ -11,4 +11,5 @@ data class Town (
     @ColumnInfo(name = "name") val name: String,
     @ColumnInfo(name = "description-weather") val description: String,
     @ColumnInfo(name = "degrees-temperature") val degrees: String,
+    @ColumnInfo(name = "icon") val icon: String,
 )
