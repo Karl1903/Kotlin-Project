@@ -14,10 +14,14 @@ class TownTrackerApplication : Application() {
     //todo: wetter api.
     private val retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("https://www.omdbapi.com/")
+            .baseUrl("https://api.openweathermap.org")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
+
+    //Wetter api key: cc5ef9e3576dc1e8bc30087dae5ee9ca
+    //The endpoint: https://api.openweathermap.org.
+    //London: https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=cc5ef9e3576dc1e8bc30087dae5ee9ca
 
     val weatherApi: WeatherApi by lazy { retrofit.create(WeatherApi::class.java) }
 }
