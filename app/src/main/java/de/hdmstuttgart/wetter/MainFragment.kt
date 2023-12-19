@@ -23,7 +23,7 @@ class MainFragment : Fragment(R.layout.fragment_main), TownCLickListener {
         super.onViewCreated(view, savedInstanceState)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.homeRecyclerView)
-        recyclerView.layoutManager = LinearLyoutManager(context)
+        recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.addItemDecoration(
             DividerItemDecoration(
                 context,
