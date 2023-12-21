@@ -8,7 +8,7 @@ interface WeatherApi {
 
     @GET(".")
     suspend fun getSearchResult(
-        @Query("s") movieSearch: String,
+        @Query("s") weatherSearch: String,
         @Query("apikey") apikey: String
 
     ): SearchResponse

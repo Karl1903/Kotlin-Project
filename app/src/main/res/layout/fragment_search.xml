@@ -14,12 +14,12 @@
         android:ems="10"
         android:inputType="text"
         app:layout_constraintBottom_toTopOf="@id/searchRecyclerView"
-        app:layout_constraintEnd_toStartOf="@id/searchWeatherTownButton"
+        app:layout_constraintEnd_toStartOf="@id/searchWeatherTitleButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
-        android:id="@+id/searchWeatherTownButton"
+        android:id="@+id/searchWeatherTitleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Search Town"

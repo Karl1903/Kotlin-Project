@@ -86,7 +86,7 @@ class SearchFragment : Fragment(R.layout.fragment_search), TownCLickListener {
             val townTrackerApplication = it.application as TownTrackerApplication
 
             lifecycleScope.launch(Dispatchers.IO) {
-                val payload = townTrackerApplication.weatherApi.getSearchResult(searchTitleText, "7cb19ac6")
+                val payload = townTrackerApplication.weatherApi.getSearchResult(searchTitleText, "8530ff5dfe77d578aff33326c8a75c76")
                 data.clear()
 
                 val towns = payload.search.map { return@map it.toDomain()}

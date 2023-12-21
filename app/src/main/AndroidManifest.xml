@@ -19,6 +19,9 @@
             android:name=".Search.SearchActivity"
             android:exported="false" />
         <activity
+            android:name=".weather.WeatherActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

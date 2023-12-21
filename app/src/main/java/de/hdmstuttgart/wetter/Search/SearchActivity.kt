@@ -1,4 +1,4 @@
-package de.hdmstuttgart.wetter.search
+package de.hdmstuttgart.wetter.Search
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

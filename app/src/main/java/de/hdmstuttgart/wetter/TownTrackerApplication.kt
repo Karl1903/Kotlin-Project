@@ -14,7 +14,7 @@ class TownTrackerApplication : Application() {
     //todo: wetter api.
     private val retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("https://www.omdbapi.com/")
+            .baseUrl("https://openweathermap.org/data/2.5/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
