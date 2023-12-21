@@ -19,7 +19,7 @@
         android:theme="@style/Theme.Wetter"
         tools:targetApi="31">
         <activity
-            android:name=".Search.SearchActivity"
+            android:name=".search.SearchActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

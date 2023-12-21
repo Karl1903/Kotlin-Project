@@ -21,11 +21,12 @@ import de.hdmstuttgart.wetter.Town.Town
 
         // Sample data structure representing the weather for London
         private val londonWeather = Town(
-            townID = "1",
+            id = 1,
             name = "London",
             description = "Few clouds",
-            degrees = "280.33",
-            icon = "02n")
+            temp = 280.33,
+            icon = "02n"
+                                   )
 
         override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
@@ -45,7 +46,7 @@ import de.hdmstuttgart.wetter.Town.Town
 
             // Set data to views
             cityNameTextView.text = londonWeather.name
-            temperatureTextView.text = "${londonWeather.degrees} °C"
+            temperatureTextView.text = "${londonWeather.temp} °C"
             descriptionTextView.text = londonWeather.description
 
             // Load weather icon using Glide library

@@ -9,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import de.hdmstuttgart.R
+import de.hdmstuttgart.wetter.R
 import de.hdmstuttgart.wetter.Town.Town
 import de.hdmstuttgart.wetter.TownAdapter
 import de.hdmstuttgart.wetter.TownCLickListener
@@ -42,7 +42,7 @@ class SearchFragment : Fragment(R.layout.fragment_search), TownCLickListener {
         recyclerView.adapter = adapter
 
         //Set the search Button so the User can Search for a Town.
-        val searchTitleButton = view.findViewById<Button>(R.id.searchWeatherTitleButton)
+        val searchTitleButton = view.findViewById<Button>(R.id.searchWeatherTownButton)
         searchTitleButton.setOnClickListener{
             //Get the text. the user writes the text for the name of the town.
             val searchTownEditText = view.findViewById<EditText>(R.id.searchWeatherTownEditText)

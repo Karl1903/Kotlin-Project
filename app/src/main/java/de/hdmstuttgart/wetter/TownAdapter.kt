@@ -25,7 +25,7 @@ interface TownCLickListener {
         val townModel = list[position]
         holder.nameView.text = townModel.name
         holder.descriptionView.text = townModel.description
-        holder.degreesView.text = townModel.degrees
+        holder.temperatureView.text = townModel.temp.toString()
 
         //Glide.with(holder.itemView.context).load(townModel.poster).into(holder.posterImageView)
 
@@ -41,7 +41,7 @@ interface TownCLickListener {
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
         val nameView: TextView = itemView.findViewById(R.id.name)
         val descriptionView: TextView = itemView.findViewById(R.id.description)
-        val degreesView: TextView = itemView.findViewById(R.id.degrees)
+        val temperatureView: TextView = itemView.findViewById(R.id.temperature)
         //todo: What we could do here is an image that depends on the description
         //todo: if the weather description is "sunny" then we take the sun pic.
         //todo: description = rain. then rain.
