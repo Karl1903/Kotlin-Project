@@ -1,4 +1,4 @@
-package de.hdmstuttgart.wetter.Search
+package de.hdmstuttgart.wetter.search
 
 import android.os.Bundle
 import android.util.Log
