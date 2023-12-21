@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.storage.CacheResetOnProcessCanceled.enabled
-
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
@@ -37,12 +35,6 @@ android {
         jvmTarget = "1.8"
     }
 
-    dataBinding {
-        enabled = true }
-}
-
-
-
 dependencies {
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -60,6 +52,5 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.11.0")
     ksp("com.github.bumptech.glide:compiler:4.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-}
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")} }
 

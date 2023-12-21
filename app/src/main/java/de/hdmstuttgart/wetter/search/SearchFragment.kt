@@ -9,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import de.hdmstuttgart.wetter.R
+import de.hdmstuttgart.R
 import de.hdmstuttgart.wetter.Town.Town
 import de.hdmstuttgart.wetter.TownAdapter
 import de.hdmstuttgart.wetter.TownCLickListener
