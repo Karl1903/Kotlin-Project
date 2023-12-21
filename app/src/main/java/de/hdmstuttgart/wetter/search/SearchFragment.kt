@@ -1,6 +1,7 @@
 package de.hdmstuttgart.wetter.Search
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -86,10 +87,12 @@ class SearchFragment : Fragment(R.layout.fragment_search), TownClickListener {
 
             lifecycleScope.launch(Dispatchers.IO) {
                 val payload = townTrackerApplication.weatherApi.getWeatherResults(townName, "cc5ef9e3576dc1e8bc30087dae5ee9ca")
+                Log.d("Data from api call:", "data from api is $payload")
                 data.clear()
 
                 val towns = payload.search.map { return@map it.toDomain()}
                 data.addAll(towns)
+                Log.d("Data towns:", "data towns: $data")
 
                 withContext(Dispatchers.Main){
                     adapter.notifyDataSetChanged()
