@@ -13,7 +13,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class MainFragment : Fragment(R.layout.fragment_main), TownCLickListener {
+class MainFragment : Fragment(R.layout.fragment_main), TownClickListener {
 
     private val data = ArrayList<Town>()
 

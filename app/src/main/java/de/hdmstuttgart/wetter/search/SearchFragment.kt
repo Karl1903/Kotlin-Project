@@ -1,6 +1,7 @@
 package de.hdmstuttgart.wetter.Search
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
@@ -12,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import de.hdmstuttgart.wetter.R
 import de.hdmstuttgart.wetter.Town.Town
 import de.hdmstuttgart.wetter.TownAdapter
-import de.hdmstuttgart.wetter.TownCLickListener
+import de.hdmstuttgart.wetter.TownClickListener
 import de.hdmstuttgart.wetter.TownTrackerApplication
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -22,7 +23,7 @@ import kotlinx.coroutines.withContext
  * Then, the user can click on the button with the text "Search Town".
  *  */
 
-class SearchFragment : Fragment(R.layout.fragment_search), TownCLickListener {
+class SearchFragment : Fragment(R.layout.fragment_search), TownClickListener {
 
     private val data = ArrayList<Town>()
 
@@ -56,7 +57,7 @@ class SearchFragment : Fragment(R.layout.fragment_search), TownCLickListener {
 
     //Town gets clicked, saved into the repository that saves the clicked towns.
     //The purpose of this is that the user has the list with the recent searches he did in the
-    //Main Activity , Application Start. So he can access the weather data for his/her favorite towns
+    //Search Activity. So he can access the weather data for his/her favorite towns
     // fast without the need to write the town name again.
     override fun onTownClickListener(position: Int) {
         val town = data.get(position)
@@ -86,10 +87,12 @@ class SearchFragment : Fragment(R.layout.fragment_search), TownCLickListener {
 
             lifecycleScope.launch(Dispatchers.IO) {
                 val payload = townTrackerApplication.weatherApi.getWeatherResults(townName, "cc5ef9e3576dc1e8bc30087dae5ee9ca")
+                Log.d("Data from api call:", "data from api is $payload")
                 data.clear()
 
                 val towns = payload.search.map { return@map it.toDomain()}
                 data.addAll(towns)
+                Log.d("Data towns:", "data towns: $data")
 
                 withContext(Dispatchers.Main){
                     adapter.notifyDataSetChanged()

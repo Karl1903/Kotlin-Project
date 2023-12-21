@@ -7,13 +7,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import de.hdmstuttgart.wetter.Town.Town
 
-interface TownCLickListener {
+interface TownClickListener {
 
     fun onTownClickListener(position: Int)
 }
 
     class TownAdapter(private val list: List<Town>,
-                       private val townCLickListener: TownCLickListener
+                       private val townClickListener: TownClickListener
     ): RecyclerView.Adapter<TownAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -30,7 +30,7 @@ interface TownCLickListener {
         //Glide.with(holder.itemView.context).load(townModel.poster).into(holder.posterImageView)
 
         holder.itemView.setOnClickListener{
-            townCLickListener.onTownClickListener(position)
+            townClickListener.onTownClickListener(position)
         }
     }
 
