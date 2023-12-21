@@ -9,7 +9,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import de.hdmstuttgart.wetter.R
+import de.hdmstuttgart.R
 import de.hdmstuttgart.wetter.Town.Town
 import de.hdmstuttgart.wetter.TownAdapter
 import de.hdmstuttgart.wetter.TownCLickListener
@@ -79,13 +79,13 @@ class SearchFragment : Fragment(R.layout.fragment_search), TownCLickListener {
     //Then, the found town names are saved into the data-Array.
 
     //Todo: prüfen, was für daten die wetter api sendet. wert von town.
-    private fun searchTowns(searchTitleText: String) {
+    private fun searchTowns(townName: String) {
 
         activity?.let { it ->
             val townTrackerApplication = it.application as TownTrackerApplication
 
             lifecycleScope.launch(Dispatchers.IO) {
-                val payload = townTrackerApplication.weatherApi.getSearchResult(searchTitleText, "cc5ef9e3576dc1e8bc30087dae5ee9ca")
+                val payload = townTrackerApplication.weatherApi.getWeatherResults(townName, "cc5ef9e3576dc1e8bc30087dae5ee9ca")
                 data.clear()
 
                 val towns = payload.search.map { return@map it.toDomain()}

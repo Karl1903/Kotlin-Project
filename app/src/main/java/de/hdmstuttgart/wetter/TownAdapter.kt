@@ -3,10 +3,8 @@ package de.hdmstuttgart.wetter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import de.hdmstuttgart.wetter.Town.Town
 
 interface TownCLickListener {
@@ -15,7 +13,8 @@ interface TownCLickListener {
 }
 
     class TownAdapter(private val list: List<Town>,
-                       private val townCLickListener: TownCLickListener): RecyclerView.Adapter<TownAdapter.ViewHolder>() {
+                       private val townCLickListener: TownCLickListener
+    ): RecyclerView.Adapter<TownAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.town_view, parent, false)
