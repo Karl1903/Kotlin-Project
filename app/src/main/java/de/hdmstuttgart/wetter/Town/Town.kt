@@ -12,7 +12,7 @@ data class Town (
     @SerializedName("name") var name: String? = null,
     @SerializedName("description") var description: String? = null,
     //temperature
-    @SerializedName("temp") var temp: Double? = null,
+    @SerializedName("temperature") var temp: Double? = null,
     // we can add an icon from the folder res.wetter-pictures.
     @ColumnInfo(name = "icon") val icon: String,
 )
