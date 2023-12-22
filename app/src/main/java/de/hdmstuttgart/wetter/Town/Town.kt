@@ -1,6 +1,5 @@
 package de.hdmstuttgart.wetter.Town
 
-import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
@@ -14,5 +13,5 @@ data class Town (
     //temperature
     @SerializedName("temperature") var temp: Double? = null,
     // we can add an icon from the folder res.wetter-pictures.
-    @ColumnInfo(name = "icon") val icon: String,
+    //@ColumnInfo(name = "icon") val icon: String,
 )
