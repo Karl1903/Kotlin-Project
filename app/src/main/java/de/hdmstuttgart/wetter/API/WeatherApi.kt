@@ -11,7 +11,13 @@ import retrofit2.http.Query
  * the programm appends the api-key.
  *
  **/
-interface WeatherApi {
+public interface WeatherApi {
+
+    @GET("weather")
+    fun getCurrentWeatherData(
+    @Query("q") location: String,
+    @Query("appid") apiKey: String = Configuration.API_KEY):
+            SearchResponse;
 
     @GET("forecast?")
     suspend fun getWeatherResults(
