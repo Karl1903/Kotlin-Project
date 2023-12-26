@@ -13,10 +13,10 @@ data class TownDTO (
     @SerializedName("id") val id: Int,
     @SerializedName("name") val name: String,
     @SerializedName("description") val description: String,
-    @SerializedName("temperature") val temp: String,
+    @SerializedName("temperature") val temperature: String,
     //@SerializedName("icon") val icon: String,
 ){
     fun toDomain(): Town{
-        return Town(id = id, name = name, description = description, temp = temp)
+        return Town(id = id, name = name, description = description, temperature = temperature)
     }
 }

@@ -31,7 +31,7 @@ import retrofit2.Response
     private lateinit var temperatureTextView: TextView
     private lateinit var iconImageView: ImageView
 
-    private var WeatherApi: WeatherApi? = null
+    private var weatherApi: WeatherApi? = null
     private val apiKey = Configuration.API_KEY
 
         override fun onCreateView(
@@ -50,7 +50,7 @@ import retrofit2.Response
             descriptionTextView = view.findViewById(R.id.descriptionTextView)
             iconImageView = view.findViewById(R.id.iconImageView)
 
-            WeatherApi = ApiClient.instance?.create(WeatherApi!!::class.java)
+            weatherApi = ApiClient.instance?.create(weatherApi!!::class.java)
 
             loadWeatherData("London")
 
@@ -71,9 +71,9 @@ import retrofit2.Response
         }
 
     private fun loadWeatherData(location: String) {
-        WeatherApi?.getCurrentWeatherData(location, apiKey)
+        weatherApi?.getCurrentWeatherData(location, apiKey)
             object : Callback<Town> {
-                override fun onResponse(call: Call<Town>, response: Response<Town>) {
+                override fun onResponse(call: Call<Town?>, response: Response<Town?>) {
                     if (response.isSuccessful) {
                         val weatherData: Town? = response.body()
                         if (weatherData != null) {
@@ -84,7 +84,7 @@ import retrofit2.Response
                     }
                 }
 
-                override fun onFailure(call: Call<Town>, t: Throwable?) {
+                override fun onFailure(call: Call<Town?>, t: Throwable?) {
                     showErrorToast()
                 }
             }
@@ -97,7 +97,7 @@ import retrofit2.Response
     private fun updateUI(town: Town) {
         townNameTextView.text = town.name
         descriptionTextView.text = town.description
-        temperatureTextView.text = "Temperature: ${town.temp} °C"
-        // Load weather icon using a library like Picasso or Glide
+        temperatureTextView.text = "Temperature: ${town.temperature} °C"
+        // Load weather icon with Glide.
     }
     }
