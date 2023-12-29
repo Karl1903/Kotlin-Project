@@ -1,4 +1,4 @@
-package de.hdmstuttgart.wetter.model
+package de.hdmstuttgart.wetter.datenmodell
 
 import com.google.gson.annotations.SerializedName
 

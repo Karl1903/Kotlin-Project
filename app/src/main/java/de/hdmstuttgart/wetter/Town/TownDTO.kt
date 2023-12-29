@@ -15,12 +15,12 @@ import com.google.gson.annotations.SerializedName
 
 @Entity
 data class TownDTO (
-    @PrimaryKey(autoGenerate = true) val keyID: Int = 0,
-    @SerializedName("id") var id: Int? = null,
-    @SerializedName("name") var name: String? = null,
-    @SerializedName("description") var description: String? = null,
+    @PrimaryKey(autoGenerate = true) val keyID: Int,
+    @SerializedName("id") val id: Int,
+    @SerializedName("name") val name: String,
+    @SerializedName("description") val description: String,
     //temperature
-    @SerializedName("temperature") var temperature: String? = null,
-    // we can add an icon from the folder res.wetter-pictures.
+    @SerializedName("temp") val temperature: String,
+    // we can add an icon from the folder res.drawable.
     //@SerializedName("icon") val icon: String? = null,
 )

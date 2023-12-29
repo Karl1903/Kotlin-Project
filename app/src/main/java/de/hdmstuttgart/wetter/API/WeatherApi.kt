@@ -2,7 +2,7 @@ package de.hdmstuttgart.wetter.API
 
 import de.hdmstuttgart.wetter.Configuration
 import de.hdmstuttgart.wetter.Town.TownDTO
-import de.hdmstuttgart.wetter.model.City
+import de.hdmstuttgart.wetter.datenmodell.City
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -16,15 +16,15 @@ import retrofit2.http.Query
  **/
 public interface WeatherApi {
 
-    @GET("weather")
-    fun getCurrentWeatherData(
+    @GET("weather?")
+    fun getWeatherData(
     @Query("q") location: String,
     @Query("appid") apiKey: String = Configuration.API_KEY):
             TownDTO;
 
     @GET("forecast?")
-    suspend fun getWeatherResults(
+    fun getWeatherResults(
         @Query("q") townName: String,
         @Query("appid") apikey: String = Configuration.API_KEY
-    ): City
+    ): TownDTO;
 }

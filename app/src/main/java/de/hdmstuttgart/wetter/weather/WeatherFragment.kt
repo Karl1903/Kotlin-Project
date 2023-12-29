@@ -71,7 +71,7 @@ import retrofit2.Response
         }
 
     private fun loadWeatherData(location: String) {
-        weatherApi?.getCurrentWeatherData(location, apiKey)
+        weatherApi?.getWeatherData(location, apiKey)
             object : Callback<TownDTO> {
                 override fun onResponse(call: Call<TownDTO?>, response: Response<TownDTO?>) {
                     if (response.isSuccessful) {

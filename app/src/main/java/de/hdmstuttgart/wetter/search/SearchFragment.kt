@@ -45,7 +45,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
             //Search towns that fit to the text the user writes. So if the user just writes
             //few letters like "Li" the list will show many towns like "Lissabon", "Lichtenrade".
-            searchTowns(searchTownText)
+            searchTown(searchTownText)
 
             //Navigates to the weather activity.
             //activity?.let {
@@ -83,13 +83,14 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     // Then we can access the data and save the town to the TownDatabase.
 
     //Todo: prüfen, was für daten die wetter api sendet. wert von town.
-    private fun searchTowns(townName: String) {
+    private fun searchTown(townName: String) {
 
        activity?.let { it ->
             val townTrackerApplication = it.application as TownTrackerApplication
 
             lifecycleScope.launch(Dispatchers.IO) {
-                val payload = townTrackerApplication.weatherApi.getWeatherResults(townName, "cc5ef9e3576dc1e8bc30087dae5ee9ca")
+                Log.d("townName", "townName: $townName")
+                val payload = townTrackerApplication.weatherApi.getWeatherData(townName, "cc5ef9e3576dc1e8bc30087dae5ee9ca")
                 Log.d("Data from api call:", "data from api is $payload")
 
                 //to get a List. we dont need that 93%.
