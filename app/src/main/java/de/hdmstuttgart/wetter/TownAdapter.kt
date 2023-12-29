@@ -5,15 +5,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import de.hdmstuttgart.wetter.Town.Town
+import de.hdmstuttgart.wetter.Town.TownDTO
 
 interface TownClickListener {
 
     fun onTownClickListener(position: Int)
 }
 
-    class TownAdapter(private val list: List<Town>,
-                       private val townClickListener: TownClickListener
+    class TownAdapter(private val list: List<TownDTO>,
+                      private val townClickListener: TownClickListener
     ): RecyclerView.Adapter<TownAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

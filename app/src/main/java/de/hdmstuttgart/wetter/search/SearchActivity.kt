@@ -18,9 +18,4 @@ class SearchActivity : AppCompatActivity() {
         setContentView(R.layout.activity_search)
     }
 
-    //Navigates to the weather activity.
-    fun onWeatherTownClick(view: View){
-        val intent = Intent(this, WeatherActivity::class.java)
-        startActivity(intent)
-    }
 }

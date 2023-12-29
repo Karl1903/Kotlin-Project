@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 
-@Database(entities = [Town::class], version = 2, exportSchema = false)
+@Database(entities = [TownDTO::class], version = 2, exportSchema = false)
 abstract class TownDatabase : RoomDatabase() {
 
     abstract fun townDao(): TownDao
@@ -20,7 +20,7 @@ abstract class TownDatabase : RoomDatabase() {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     TownDatabase::class.java,
-                    "town-database").build()
+                    "town").build()
                 INSTANCE = instance
                 instance
             }

@@ -11,7 +11,7 @@ import de.hdmstuttgart.wetter.API.WeatherApi
 import de.hdmstuttgart.wetter.ApiClient
 import de.hdmstuttgart.wetter.Configuration
 import de.hdmstuttgart.wetter.R
-import de.hdmstuttgart.wetter.Town.Town
+import de.hdmstuttgart.wetter.Town.TownDTO
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -72,10 +72,10 @@ import retrofit2.Response
 
     private fun loadWeatherData(location: String) {
         weatherApi?.getCurrentWeatherData(location, apiKey)
-            object : Callback<Town> {
-                override fun onResponse(call: Call<Town?>, response: Response<Town?>) {
+            object : Callback<TownDTO> {
+                override fun onResponse(call: Call<TownDTO?>, response: Response<TownDTO?>) {
                     if (response.isSuccessful) {
-                        val weatherData: Town? = response.body()
+                        val weatherData: TownDTO? = response.body()
                         if (weatherData != null) {
                             updateUI(weatherData)
                         }
@@ -84,7 +84,7 @@ import retrofit2.Response
                     }
                 }
 
-                override fun onFailure(call: Call<Town?>, t: Throwable?) {
+                override fun onFailure(call: Call<TownDTO?>, t: Throwable?) {
                     showErrorToast()
                 }
             }
@@ -94,10 +94,10 @@ import retrofit2.Response
         //Toast.makeText(this@WeatherFragment, "fail", Toast.LENGTH_SHORT).show()
     }
 
-    private fun updateUI(town: Town) {
-        townNameTextView.text = town.name
-        descriptionTextView.text = town.description
-        temperatureTextView.text = "Temperature: ${town.temperature} °C"
+    private fun updateUI(townDTO: TownDTO) {
+        townNameTextView.text = townDTO.name
+        descriptionTextView.text = townDTO.description
+        temperatureTextView.text = "Temperature: ${townDTO.temperature} °C"
         // Load weather icon with Glide.
     }
     }

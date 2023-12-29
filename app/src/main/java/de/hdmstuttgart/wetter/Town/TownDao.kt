@@ -5,16 +5,22 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 
-
+/**
+ * Town Data Access Object to access the saved towns.
+ * do tasks for the towns.
+ * insert a new town.
+ * get the towns.
+ * delete.
+ * */
 @Dao
 interface TownDao {
 
-    @Query("SELECT * FROM town")
-    fun getTowns():List<Town>
+    @Query("SELECT * FROM towndto")
+    fun getTowns():List<TownDTO>
 
     @Insert
-    suspend fun insert(town: Town)
+    suspend fun insert(townDTO: TownDTO)
 
     @Delete
-    suspend fun delete(town: Town)
+    suspend fun delete(townDTO: TownDTO)
 }

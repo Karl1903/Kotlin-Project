@@ -7,7 +7,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import de.hdmstuttgart.wetter.Town.Town
+import de.hdmstuttgart.wetter.Town.TownDTO
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -15,7 +15,7 @@ import kotlinx.coroutines.withContext
 
 class MainFragment : Fragment(R.layout.fragment_main), TownClickListener {
 
-    private val data = ArrayList<Town>()
+    private val data = ArrayList<TownDTO>()
 
     private val adapter = TownAdapter(data, this)
 
