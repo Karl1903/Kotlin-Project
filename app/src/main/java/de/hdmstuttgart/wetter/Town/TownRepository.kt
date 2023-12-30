@@ -4,17 +4,17 @@ import androidx.annotation.WorkerThread
 
 class TownRepository(private val townDao: TownDao) {
 
-    fun getTowns(): List<TownDTO>{
+    fun getTowns(): List<Town>{
         return townDao.getTowns()
     }
 
     @WorkerThread
-    suspend fun insert(townDTO: TownDTO){
-        townDao.insert(townDTO)
+    suspend fun insert(town: Town){
+        townDao.insert(town)
     }
 
     @WorkerThread
-    suspend fun delete(townDTO: TownDTO){
-        townDao.delete(townDTO)
+    suspend fun delete(town: Town){
+        townDao.delete(town)
     }
 }

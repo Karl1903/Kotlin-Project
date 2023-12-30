@@ -15,12 +15,12 @@ import androidx.room.Query
 @Dao
 interface TownDao {
 
-    @Query("SELECT * FROM towndto")
-    fun getTowns():List<TownDTO>
+    @Query("SELECT * FROM town")
+    fun getTowns():List<Town>
 
     @Insert
-    suspend fun insert(townDTO: TownDTO)
+    suspend fun insert(town: Town)
 
     @Delete
-    suspend fun delete(townDTO: TownDTO)
+    suspend fun delete(town: Town)
 }

@@ -11,10 +11,13 @@ import de.hdmstuttgart.wetter.API.WeatherApi
 import de.hdmstuttgart.wetter.ApiClient
 import de.hdmstuttgart.wetter.Configuration
 import de.hdmstuttgart.wetter.R
+import de.hdmstuttgart.wetter.Town.Town
 import de.hdmstuttgart.wetter.Town.TownDTO
+import de.hdmstuttgart.wetter.Town.TownDao
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import de.hdmstuttgart.wetter.TownTrackerApplication
 
 
 //todo: create a Fragment that shows the weather data for one single town.
@@ -57,7 +60,7 @@ import retrofit2.Response
             val id = arguments?.getInt("id")
             val name = arguments?.getString("name")
             val description = arguments?.getString("description")
-            val temperature = arguments?.getString("temperature")
+            val temp = arguments?.getString("temp")
 
             // Load weather icon using Glide library
           //  Glide.with(requireContext())
@@ -70,34 +73,52 @@ import retrofit2.Response
        //     return "https://openweathermap.org/img/w/$icon.png"
         }
 
-    private fun loadWeatherData(location: String) {
-        weatherApi?.getWeatherData(location, apiKey)
-            object : Callback<TownDTO> {
-                override fun onResponse(call: Call<TownDTO?>, response: Response<TownDTO?>) {
-                    if (response.isSuccessful) {
-                        val weatherData: TownDTO? = response.body()
-                        if (weatherData != null) {
-                            updateUI(weatherData)
-                        }
-                    } else {
-                        showErrorToast()
-                    }
-                }
+    //private fun loadWeatherData(townName: String) {
+    //    weatherApi?.getWeatherData(townName, apiKey)
+    //        object : Callback<TownDTO> {
+    //            override fun onResponse(call: Call<TownDTO?>, response: Response<TownDTO?>) {
+    //                if (response.isSuccessful) {
+    //                    val weatherData: Town? = response.body()
+    //                    if (weatherData != null) {
+    //                        updateUI(weatherData)
+    //                    }
+    //                } else {
+    //                    showErrorToast()
+    //                }
+    //            }
 
-                override fun onFailure(call: Call<TownDTO?>, t: Throwable?) {
-                    showErrorToast()
+    //          override fun onFailure(call: Call<TownDTO?>, t: Throwable?) {
+    //                showErrorToast()
+    //            }
+    //        }
+    //}
+
+    //the weather data was get in the search request,
+    //now we just need to get it from the local storage to show it in the weather fragment.
+    private fun loadWeatherData(townName: String) {
+
+        activity?.let { it ->
+            val townTrackerApplication = it.application as TownTrackerApplication
+            val towns = townTrackerApplication.repository.getTowns()
+            var town = Town(key = 0, id= "1", name = "", description = "", temp = "")
+            for (element in towns){
+                if (element.name == townName) {
+                    town = element
                 }
             }
+                updateUI(town)
+
+        }
     }
 
     private fun showErrorToast() {
         //Toast.makeText(this@WeatherFragment, "fail", Toast.LENGTH_SHORT).show()
     }
 
-    private fun updateUI(townDTO: TownDTO) {
-        townNameTextView.text = townDTO.name
-        descriptionTextView.text = townDTO.description
-        temperatureTextView.text = "Temperature: ${townDTO.temperature} °C"
+    private fun updateUI(town: Town) {
+        townNameTextView.text = "town name: ${town.name}"
+        descriptionTextView.text = "The weather is: ${town.description}"
+        temperatureTextView.text = "Temperature: ${town.temp} °C"
         // Load weather icon with Glide.
     }
     }

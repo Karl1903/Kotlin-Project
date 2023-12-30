@@ -20,11 +20,11 @@ public interface WeatherApi {
     fun getWeatherData(
     @Query("q") location: String,
     @Query("appid") apiKey: String = Configuration.API_KEY):
-            TownDTO;
+            SearchResponse;
 
     @GET("forecast?")
     fun getWeatherResults(
         @Query("q") townName: String,
         @Query("appid") apikey: String = Configuration.API_KEY
-    ): TownDTO;
+    ): SearchResponse;
 }

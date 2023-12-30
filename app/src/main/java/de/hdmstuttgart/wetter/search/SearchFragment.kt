@@ -8,6 +8,7 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import de.hdmstuttgart.wetter.R
+import de.hdmstuttgart.wetter.Town.Town
 import de.hdmstuttgart.wetter.Town.TownDTO
 import de.hdmstuttgart.wetter.TownTrackerApplication
 import kotlinx.coroutines.Dispatchers
@@ -88,9 +89,13 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
        activity?.let { it ->
             val townTrackerApplication = it.application as TownTrackerApplication
 
+           try {
             lifecycleScope.launch(Dispatchers.IO) {
                 Log.d("townName", "townName: $townName")
-                val payload = townTrackerApplication.weatherApi.getWeatherData(townName, "cc5ef9e3576dc1e8bc30087dae5ee9ca")
+                val response = townTrackerApplication.weatherApi.getWeatherData(townName, "cc5ef9e3576dc1e8bc30087dae5ee9ca")
+                val payload = response.search.toDomain()
+
+                //val town = payload.search.map { return@map it.toDomain()}
                 Log.d("Data from api call:", "data from api is $payload")
 
                 //to get a List. we dont need that 93%.
@@ -98,18 +103,32 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
                //Log.d("Data wetter:", "data wetter: $dataResponse")
 
-                val townDTO = TownDTO(
-                            keyID = 1,
-                            id = 1,
-                            name = "London",
-                            description = "sunny",
-                            temperature = "13C")
-                townTrackerApplication.repository.insert(townDTO)
+                //val townDTO = TownDTO(
+                  //          keyID = 1,
+                  //          id = 1,
+                  //          name = "London",
+                  //          description = "sunny",
+                  //          temperature = "13C")
+
+                // Extract relevant information from the API response
+                val town = Town(
+                    id = payload.id,
+                    name = payload.name,
+                    description = payload.description,  // Extracting the first weather description
+                    temp = payload.temp  // Extracting temperature
+                )
+                // Insert the retrieved data into the Room database
+                townTrackerApplication.repository.insert(town)
 
                 //withContext(Dispatchers.Main){
                     //adapter.notifyDataSetChanged()
                // }
             }
+
+           } catch (e: Exception) {
+               // Handle API call failure or parsing error
+               Log.d("api call error message:", "api call error message: ${e.message}")
+           }
         }
     }
 }

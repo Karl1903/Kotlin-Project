@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import de.hdmstuttgart.wetter.Town.Town
 import de.hdmstuttgart.wetter.Town.TownDTO
 
 interface TownClickListener {
@@ -12,7 +13,7 @@ interface TownClickListener {
     fun onTownClickListener(position: Int)
 }
 
-    class TownAdapter(private val list: List<TownDTO>,
+    class TownAdapter(private val list: List<Town>,
                       private val townClickListener: TownClickListener
     ): RecyclerView.Adapter<TownAdapter.ViewHolder>() {
 
@@ -25,7 +26,7 @@ interface TownClickListener {
         val townModel = list[position]
         holder.nameView.text = townModel.name
         holder.descriptionView.text = townModel.description
-        holder.temperatureView.text = townModel.temperature.toString()
+        holder.temperatureView.text = townModel.temp.toString()
 
         //Glide.with(holder.itemView.context).load(townModel.poster).into(holder.posterImageView)
 
