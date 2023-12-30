@@ -1,5 +1,6 @@
 package de.hdmstuttgart.wetter.search
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,6 +12,7 @@ import de.hdmstuttgart.wetter.R
 import de.hdmstuttgart.wetter.Town.Town
 import de.hdmstuttgart.wetter.Town.TownDTO
 import de.hdmstuttgart.wetter.TownTrackerApplication
+import de.hdmstuttgart.wetter.weather.WeatherActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -44,15 +46,17 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             val searchTownEditText = view.findViewById<EditText>(R.id.searchWeatherTownEditText)
             val searchTownText = searchTownEditText.text.toString()
 
-            //Search towns that fit to the text the user writes. So if the user just writes
-            //few letters like "Li" the list will show many towns like "Lissabon", "Lichtenrade".
+            //Search the town that fits to the text the user writes.
+            //Then, the weather data for this town is saved to the database.
+            //Then, the user is navigated to the weather activity.
+            //there, the data is retrieved from the database and presented.
             searchTown(searchTownText)
 
             //Navigates to the weather activity.
-            //activity?.let {
-            //    val intent = Intent(it, WeatherActivity::class.java)
-            //    it.startActivity(intent)
-            //}
+            activity?.let {
+                val intent = Intent(it, WeatherActivity::class.java)
+                it.startActivity(intent)
+            }
         }
     }
 
