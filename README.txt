@@ -3,16 +3,22 @@ Description 2-6 sentences:
 
 The Android Application that the project team 
 seeks to develop targets a weather API, gets data and parses the data.
-The user of the application can type in the Location,
-Then presses the button "show weather", 
-finally gets data for it for example 2 to 3 weeks to the future.
+The user of the application can type in the Location/ town (SearchFragment).
+Then presses the button to get the weather data.
+the data gets saved into the local storage database.
+then the user is navigated to the WeatherFragment.
+There the weather data is retrieved from the database.
+finally the data is presented in the Layout.
 
-Then, in the start menu of the appliaction, 
+Then, in the start menu of the appliaction 
+(MainActivity, MainFragment), 
 the user can see his recent searches
-in a list (local storage), each row shows a minimum of data
+in a list (local storage).
+The row shows a minimum of data
 like "Barcelona, appr. 23 Degrees Celcius". 
-So if the user clicks a row, he gets the 
-complete data again for the week and weather.
+So if the user clicks a row, 
+she is navigated to the WeatherFragment directly
+there the data is presented.
 If the user wants to delete a row, he can do that with 
 the click on the "X"-Button, right side.
 
