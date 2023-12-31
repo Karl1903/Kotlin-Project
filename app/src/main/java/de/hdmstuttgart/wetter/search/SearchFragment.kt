@@ -110,7 +110,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 val weatherData = response.weather[0]
 
                 // the description is in the main value but additional in the description value.
-                val description = weatherData.main.toString() + ", " + weatherData.description.toString()
+                val description = weatherData.main.toString() + ", " + weatherData.description.toString() + "."
 
                 //The Temperature is given in Kelvin, se we need to substract
                 // -273,15 to get the value in Celsius.
@@ -118,10 +118,20 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 // to max. two decimals.
                 val temperatureKelvin = response.main?.temp
                 val temperatureNotCut = temperatureKelvin?.minus(273.15)
-                val temperature = ((temperatureNotCut?.times(100.0) ?: 0.0) / 100.0).roundToInt().toString() + " degrees Celsius."
+                val temperatureString = ((temperatureNotCut?.times(100.0) ?: 0.0) / 100.0).roundToInt().toString()
+                var temperature = temperatureString + " degrees Celsius."
+                // 1 degree.
+                if (temperatureString == "1"){
+                    temperature = temperatureString + " degree Celsius."
+                }
 
                 //wind speed.
-                val windtempo = response.wind?.speed.toString() + " meters per second."
+                val windtempoString = response.wind?.speed.toString()
+                var windtempo = windtempoString + " meters per second."
+                // 1 meter.
+                if (windtempoString == "1" || windtempoString == "1.0" || windtempoString == "1.00"){
+                    windtempo = windtempoString + " meter per second."
+                }
 
                 //to get a List. we dont need that 93%.
                 //val dataResponse = payload.search.map { return@map it.toDomain()}
@@ -135,7 +145,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                   //          description = "sunny",
                   //          temperature = "13C")
 
-                // Extract relevant information from the API response
+                // Take the data from the API response.
                 val townNew = Town(
                     id = weatherData.id.toString(),
                     name = townName,
@@ -161,7 +171,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 //Navigates to the weather activity.
                 activity?.let {
                     val intent = Intent(it, WeatherActivity::class.java)
-                    // the key townName is passed to the WeatherActivity
+                    // the key townName with
+                    // the data is passed to the WeatherActivity.
                     intent.putExtra("townName", townName)
                     it.startActivity(intent)
                 }

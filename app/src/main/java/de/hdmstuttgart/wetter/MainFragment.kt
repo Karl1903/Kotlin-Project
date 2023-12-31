@@ -1,5 +1,6 @@
 package de.hdmstuttgart.wetter
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
@@ -8,17 +9,18 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.hdmstuttgart.wetter.Town.Town
-import de.hdmstuttgart.wetter.Town.TownDTO
+import de.hdmstuttgart.wetter.weather.WeatherActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 
-class MainFragment : Fragment(R.layout.fragment_main), TownClickListener {
+class MainFragment : Fragment(R.layout.fragment_main),
+    WeatherDataClickListener, TrashClickListener {
 
     private val data = ArrayList<Town>()
 
-    private val adapter = TownAdapter(data, this)
+    private val adapter = TownAdapter(data, this, this)
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -56,9 +58,24 @@ class MainFragment : Fragment(R.layout.fragment_main), TownClickListener {
         update()
     }
 
+    //Listens to the click on the town name.
+    //if the town name gets clicked
+    //the application navigated to
+    //the weather fragment.
+    override fun townListener(position: Int) {
+        val townName = data[position].name
+        //Navigates to the weather activity.
+        activity?.let {
+            val intent = Intent(it, WeatherActivity::class.java)
+            // the key townName is passed to the WeatherActivity
+            intent.putExtra("townName", townName)
+            it.startActivity(intent)
+        }
+    }
 
-
-    override fun onTownClickListener(position: Int) {
+    //Listens to the Click on the Trash Icon.
+    //If the user clicks it the line is deleted.
+    override fun trashListener(position: Int){
         val town = data[position]
 
         activity?.let {
