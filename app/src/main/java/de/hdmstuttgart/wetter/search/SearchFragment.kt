@@ -15,6 +15,7 @@ import de.hdmstuttgart.wetter.TownTrackerApplication
 import de.hdmstuttgart.wetter.weather.WeatherActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlin.math.roundToInt
 
 /** The Search Fragment empowers the user to type in the town he wants to get the weather data for.
  * Then, the user can click on the button with the text "Search Town".
@@ -42,7 +43,8 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
         //Set the search Button so the User can Search for a Town.
         val searchTitleButton = view.findViewById<Button>(R.id.searchWeatherTownButton)
         searchTitleButton.setOnClickListener{
-            //Get the text. the user writes the text for the name of the town.
+            //Get the text.
+            //the user writes the text for the name of the town.
             val searchTownEditText = view.findViewById<EditText>(R.id.searchWeatherTownEditText)
             val searchTownText = searchTownEditText.text.toString()
 
@@ -52,14 +54,12 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             //there, the data is retrieved from the database and presented.
             searchTown(searchTownText)
 
-            //Navigates to the weather activity.
-            activity?.let {
-                val intent = Intent(it, WeatherActivity::class.java)
-                it.startActivity(intent)
-            }
         }
     }
 
+    //Todo: Delete this method when it is safe that we dont neet it.
+    //Todo: Right now the flow of the application doesn't need it
+    //Todo: cause it doesn't get a list of towns but just one town with the weather data for it.
     //Town gets clicked, saved into the repository that saves the clicked towns.
     //The purpose of this is that the user has the list with the recent searches he did in the
     //Search Activity. So he can access the weather data for his/her favorite towns
@@ -114,11 +114,14 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
                 //The Temperature is given in Kelvin, se we need to substract
                 // -273,15 to get the value in Celsius.
+                //futhermore we need to cut the decimals (Nachkommastellen)
+                // to max. two decimals.
                 val temperatureKelvin = response.main?.temp
-                val temperature = temperatureKelvin?.minus(273.15).toString() + " degrees Celsius."
+                val temperatureNotCut = temperatureKelvin?.minus(273.15)
+                val temperature = ((temperatureNotCut?.times(100.0) ?: 0.0) / 100.0).roundToInt().toString() + " degrees Celsius."
 
                 //wind speed.
-                val windtempo = response.wind.toString() + " meters per second."
+                val windtempo = response.wind?.speed.toString() + " meters per second."
 
                 //to get a List. we dont need that 93%.
                 //val dataResponse = payload.search.map { return@map it.toDomain()}
@@ -133,19 +136,35 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                   //          temperature = "13C")
 
                 // Extract relevant information from the API response
-                val town = Town(
+                val townNew = Town(
                     id = weatherData.id.toString(),
                     name = townName,
                     description = description,
                     temperature = temperature,
                     windtempo = windtempo
                 )
-                //Insert the retrieved data into the Room database
-                townTrackerApplication.repository.insert(town)
+                //Check if the Town already is in the database.
+                //If yes, delete the town and add it again cause the data
+                //may have changed for the weather in the meantime.
+                //if not, just put the retrieved town-data into the Room database.
+                val towns = townTrackerApplication.repository.getTowns()
+                for (town in towns){
+                    if(town.name == townName){
+                        townTrackerApplication.repository.delete(town)
+                }}
+                townTrackerApplication.repository.insert(townNew)
 
                 //withContext(Dispatchers.Main){
                     //adapter.notifyDataSetChanged()
                // }
+
+                //Navigates to the weather activity.
+                activity?.let {
+                    val intent = Intent(it, WeatherActivity::class.java)
+                    // the key townName is passed to the WeatherActivity
+                    intent.putExtra("townName", townName)
+                    it.startActivity(intent)
+                }
             }
 
            } catch (e: Exception) {

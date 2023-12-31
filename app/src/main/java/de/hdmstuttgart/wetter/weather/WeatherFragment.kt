@@ -1,15 +1,19 @@
 package de.hdmstuttgart.wetter.weather
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import de.hdmstuttgart.wetter.API.WeatherApi
 import de.hdmstuttgart.wetter.ApiClient
 import de.hdmstuttgart.wetter.Configuration
+import de.hdmstuttgart.wetter.MainActivity
 import de.hdmstuttgart.wetter.R
 import de.hdmstuttgart.wetter.Town.Town
 import de.hdmstuttgart.wetter.Town.TownDTO
@@ -18,6 +22,10 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import de.hdmstuttgart.wetter.TownTrackerApplication
+import de.hdmstuttgart.wetter.search.SearchActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 
 //todo: create a Fragment that shows the weather data for one single town.
@@ -39,26 +47,52 @@ import de.hdmstuttgart.wetter.TownTrackerApplication
     private var weatherApi: WeatherApi? = null
     private val apiKey = Configuration.API_KEY
 
-        override fun onCreateView(
+    private var townName: String? = null
+
+    override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?
-        ): View? {
+    ): View? {
             return inflater.inflate(R.layout.fragment_weather, container, false)
-        }
+    }
 
-        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-            // Find views in the layout.
-            townNameTextView = view.findViewById(R.id.townNameTextView)
-            descriptionTextView = view.findViewById(R.id.descriptionTextView)
-            temperatureTextView = view.findViewById(R.id.temperatureTextView)
-            windtempoTextView = view.findViewById(R.id.windtempoTextView)
-            iconImageView = view.findViewById(R.id.iconImageView)
+        // Find views in the layout.
+        townNameTextView = view.findViewById(R.id.townNameTextView)
+        descriptionTextView = view.findViewById(R.id.descriptionTextView)
+        temperatureTextView = view.findViewById(R.id.temperatureTextView)
+        windtempoTextView = view.findViewById(R.id.windtempoTextView)
+        iconImageView = view.findViewById(R.id.iconImageView)
 
-            weatherApi = ApiClient.instance?.create(weatherApi!!::class.java)
+        //weatherApi = ApiClient.instance?.create(weatherApi!!::class.java)
 
-            loadWeatherData("London")
+        // the database operations must be executed
+        // with the background thread to avoid freezing the UI.
+        lifecycleScope.launch(Dispatchers.IO) {
+
+            //get the weather data from the database
+            //with the text from the user.
+            //we get the text from the searchActivity which gave it to
+            //the weatherfragment with the putExtra method.
+            // Retrieve the town name from the arguments bundle.
+            arguments?.let {
+                townName = it.getString("townName")
+            }
+            Log.d("the townname in the fragment is", "the townname in the fragment is: $townName")
+            //Note: that works in the activity. but in the fragment we need to
+            //get it from the arguments bundle.
+            //townName = intent.getStringExtra("townName")
+            val town = townName?.let { it1 -> loadWeatherData(it1) }
+
+            // withContext takes it back to the main thread for UI updates)
+            withContext(Dispatchers.Main) {
+                // Update UI with the result.
+                if (town != null) {
+                    updateUI(town)
+                }
+            }}
 
             val id = arguments?.getInt("id")
             val name = arguments?.getString("name")
@@ -74,6 +108,8 @@ import de.hdmstuttgart.wetter.TownTrackerApplication
         // Function to get the URL for the weather icon
        // private fun getWeatherIconUrl(icon: String): String {
        //     return "https://openweathermap.org/img/w/$icon.png"
+
+
         }
 
     //private fun loadWeatherData(townName: String) {
@@ -98,26 +134,25 @@ import de.hdmstuttgart.wetter.TownTrackerApplication
 
     //the weather data was get in the search request,
     //now we just need to get it from the local storage to show it in the weather fragment.
-    private fun loadWeatherData(townName: String) {
-
+    private fun loadWeatherData(townName: String): Town {
+        var town = Town(key = 0,
+            id= "1",
+            name = "",
+            description = "",
+            temperature = "",
+            windtempo = "")
         activity?.let { it ->
             val townTrackerApplication = it.application as TownTrackerApplication
             val towns = townTrackerApplication.repository.getTowns()
-            var town = Town(key = 0,
-                id= "1",
-                name = "",
-                description = "",
-                temperature = "",
-                windtempo = "")
+
             for (element in towns){
                 if (element.name == townName) {
                     town = element
                 }
             }
-                updateUI(town)
-
-        }
-    }
+                 }
+                    return town
+                        }
 
     private fun showErrorToast() {
         //Toast.makeText(this@WeatherFragment, "fail", Toast.LENGTH_SHORT).show()
@@ -125,9 +160,10 @@ import de.hdmstuttgart.wetter.TownTrackerApplication
 
     private fun updateUI(town: Town) {
         townNameTextView.text = "town name: ${town.name}"
-        descriptionTextView.text = "The weather is: ${town.description}"
+        descriptionTextView.text = "The weather: ${town.description}"
         temperatureTextView.text = "Temperature: ${town.temperature}"
         windtempoTextView.text = "wind tempo: ${town.windtempo}"
         // Load weather icon with Glide.
     }
-    }
+
+}
