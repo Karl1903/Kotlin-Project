@@ -3,7 +3,7 @@ Description 2-6 sentences:
 
 1. The Android Application that the project team seeks to develop targets the weather API from the openweathermap.org, gets data and parses the data.
 
-2. SearchFragment: The user of the application can type in the Location/town..
+2. SearchFragment: The user of the application can type in the town.
 
 3. SearchFragment: Then the user presses the button to get the weather data.
 
