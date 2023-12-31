@@ -32,6 +32,8 @@ import de.hdmstuttgart.wetter.TownTrackerApplication
     private lateinit var townNameTextView: TextView
     private lateinit var descriptionTextView: TextView
     private lateinit var temperatureTextView: TextView
+    private lateinit var windtempoTextView: TextView
+
     private lateinit var iconImageView: ImageView
 
     private var weatherApi: WeatherApi? = null
@@ -49,8 +51,9 @@ import de.hdmstuttgart.wetter.TownTrackerApplication
 
             // Find views in the layout.
             townNameTextView = view.findViewById(R.id.townNameTextView)
-            temperatureTextView = view.findViewById(R.id.temperatureTextView)
             descriptionTextView = view.findViewById(R.id.descriptionTextView)
+            temperatureTextView = view.findViewById(R.id.temperatureTextView)
+            windtempoTextView = view.findViewById(R.id.windtempoTextView)
             iconImageView = view.findViewById(R.id.iconImageView)
 
             weatherApi = ApiClient.instance?.create(weatherApi!!::class.java)
@@ -100,7 +103,12 @@ import de.hdmstuttgart.wetter.TownTrackerApplication
         activity?.let { it ->
             val townTrackerApplication = it.application as TownTrackerApplication
             val towns = townTrackerApplication.repository.getTowns()
-            var town = Town(key = 0, id= "1", name = "", description = "", temp = "")
+            var town = Town(key = 0,
+                id= "1",
+                name = "",
+                description = "",
+                temperature = "",
+                windtempo = "")
             for (element in towns){
                 if (element.name == townName) {
                     town = element
@@ -118,7 +126,8 @@ import de.hdmstuttgart.wetter.TownTrackerApplication
     private fun updateUI(town: Town) {
         townNameTextView.text = "town name: ${town.name}"
         descriptionTextView.text = "The weather is: ${town.description}"
-        temperatureTextView.text = "Temperature: ${town.temp} °C"
+        temperatureTextView.text = "Temperature: ${town.temperature}"
+        windtempoTextView.text = "wind tempo: ${town.windtempo}"
         // Load weather icon with Glide.
     }
     }

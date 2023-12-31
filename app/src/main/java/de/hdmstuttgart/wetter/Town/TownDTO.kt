@@ -1,5 +1,6 @@
 package de.hdmstuttgart.wetter.Town
 
+import android.health.connect.datatypes.units.Temperature
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
@@ -19,12 +20,18 @@ data class TownDTO (
     @SerializedName("name") val name: String,
     @SerializedName("description") val description: String,
     //temperature
-    @SerializedName("temp") val temp: String,
+    @SerializedName("temperature") val temperature: String,
+    @SerializedName("windtempo") val windtempo: String,
     // we can add an icon from the folder res.drawable.
     //@SerializedName("icon") val icon: String? = null,
 )
 {
     fun toDomain(): Town{
-        return Town(id = id, name = name, description = description, temp = temp)
+        return Town(
+            id = id,
+            name = name,
+            description = description,
+            temperature = temperature,
+            windtempo = windtempo)
     }
 }

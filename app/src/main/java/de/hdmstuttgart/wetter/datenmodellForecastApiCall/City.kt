@@ -1,4 +1,4 @@
-package de.hdmstuttgart.wetter.datenmodell
+package de.hdmstuttgart.wetter.datenmodellForecastApiCall
 
 import com.google.gson.annotations.SerializedName
 

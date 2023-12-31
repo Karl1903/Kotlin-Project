@@ -1,4 +1,4 @@
-package de.hdmstuttgart.wetter.datenmodell
+package de.hdmstuttgart.wetter.datenmodellForecastApiCall
 
 import com.google.gson.annotations.SerializedName
 
@@ -7,8 +7,8 @@ import com.google.gson.annotations.SerializedName
  * https://api.openweathermap.org/data/2.5/forecast?q=London&appid=apikey/.
  * this structure we do transfer to kotlin classes right in this package.
  **/
-data class Clouds (
-
-  @SerializedName("all") var all: Int? = null
-
-)
+data class Weather (
+  @SerializedName("id") var id: Int? = null,
+  @SerializedName("main") var main: String? = null,
+  @SerializedName("description") var description: String? = null,
+  @SerializedName("icon") var icon: String? = null)

@@ -10,7 +10,8 @@ data class Town (
     @ColumnInfo("name") val name: String,
     @ColumnInfo("description") val description: String,
     //temperature
-    @ColumnInfo("temp") val temp: String,
+    @ColumnInfo("temperature") val temperature: String,
+    @ColumnInfo("windtempo") val windtempo: String,
     // we can add an icon from the folder res.drawable.
     //@SerializedName("icon") val icon: String? = null,
     )

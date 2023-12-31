@@ -7,4 +7,5 @@
     <string name="cityName">City Name</string>
     <string name="temperature">Temperature</string>
     <string name="description">Description</string>
+    <string name="wind_tempo">wind-tempo</string>
 </resources>

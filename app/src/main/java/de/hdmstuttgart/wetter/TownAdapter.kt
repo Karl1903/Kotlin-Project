@@ -26,7 +26,7 @@ interface TownClickListener {
         val townModel = list[position]
         holder.nameView.text = townModel.name
         holder.descriptionView.text = townModel.description
-        holder.temperatureView.text = townModel.temp.toString()
+        holder.temperatureView.text = townModel.temperature.toString()
 
         //Glide.with(holder.itemView.context).load(townModel.poster).into(holder.posterImageView)
 

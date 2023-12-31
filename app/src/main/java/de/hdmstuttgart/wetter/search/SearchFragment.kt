@@ -86,7 +86,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     // the weather data for the town gets fetched.
     // The data is converted from JSON to Kotlin Objects with the retrofit converter.
     // Then we can access the data and save the town to the TownDatabase.
-
     //Todo: prüfen, was für daten die wetter api sendet. wert von town.
     private fun searchTown(townName: String) {
 
@@ -97,10 +96,29 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             lifecycleScope.launch(Dispatchers.IO) {
                 Log.d("townName", "townName: $townName")
                 val response = townTrackerApplication.weatherApi.getWeatherData(townName, "cc5ef9e3576dc1e8bc30087dae5ee9ca")
-                val payload = response.search.toDomain()
+                //val payload = response.search.toDomain()
+                val wetter1 = response.weather.toString()
+                val wetter2 = response.main.toString()
+                val wetter3 = response.wind.toString()
 
                 //val town = payload.search.map { return@map it.toDomain()}
-                Log.d("Data from api call:", "data from api is $payload")
+                Log.d("Description and Icon:", "description and icon: $wetter1")
+                Log.d("Temperature:", "Temperature: $wetter2")
+                Log.d("wind:", "wind: $wetter3")
+
+                //The Weather Object is in a List so we need to access this List.
+                val weatherData = response.weather[0]
+
+                // the description is in the main value but additional in the description value.
+                val description = weatherData.main.toString() + ", " + weatherData.description.toString()
+
+                //The Temperature is given in Kelvin, se we need to substract
+                // -273,15 to get the value in Celsius.
+                val temperatureKelvin = response.main?.temp
+                val temperature = temperatureKelvin?.minus(273.15).toString() + " degrees Celsius."
+
+                //wind speed.
+                val windtempo = response.wind.toString() + " meters per second."
 
                 //to get a List. we dont need that 93%.
                 //val dataResponse = payload.search.map { return@map it.toDomain()}
@@ -116,12 +134,13 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
                 // Extract relevant information from the API response
                 val town = Town(
-                    id = payload.id,
-                    name = payload.name,
-                    description = payload.description,  // Extracting the first weather description
-                    temp = payload.temp  // Extracting temperature
+                    id = weatherData.id.toString(),
+                    name = townName,
+                    description = description,
+                    temperature = temperature,
+                    windtempo = windtempo
                 )
-                // Insert the retrieved data into the Room database
+                //Insert the retrieved data into the Room database
                 townTrackerApplication.repository.insert(town)
 
                 //withContext(Dispatchers.Main){

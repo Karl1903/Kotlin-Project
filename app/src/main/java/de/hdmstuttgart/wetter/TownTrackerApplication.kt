@@ -14,6 +14,8 @@ class TownTrackerApplication : Application() {
         //Retrofit Setup to do API-Calls to the Weather-API openweathermap.org..
         private val retrofit by lazy {
 
+            // The converter factory is responsible for converting
+            // the raw response body into the expected return type.
                Retrofit.Builder()
                     .baseUrl(Configuration.BASE_LINK)
                     .addConverterFactory(GsonConverterFactory.create())
