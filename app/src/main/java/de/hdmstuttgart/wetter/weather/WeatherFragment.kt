@@ -27,6 +27,7 @@ import de.hdmstuttgart.wetter.search.SearchActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.Locale
 
 
 //todo: create a Fragment that shows the weather data for one single town.
@@ -172,17 +173,15 @@ import kotlinx.coroutines.withContext
     }
     private fun getIconResource(description: String): Int {
         // There are different PNG files for each weather condition.
-        return when (description.toLowerCase()) {
-            "rain" -> R.drawable.rain
-            "cloud" -> R.drawable.wolken
-            "sunny" -> R.drawable.sonnig
-            "scattered" -> R.drawable.teilweisewolken
-            "wind" -> R.drawable.starkerwind
-            "tornado" -> R.drawable.tornado
-            "storm" -> R.drawable.storm
-            "snow" -> R.drawable.schnee
-            "fog" -> R.drawable.nebel
-            else -> R.drawable.teilweisewolken
-        }}
-
-}
+        return when {
+            "rain" in description.lowercase(Locale.ROOT) -> R.drawable.rain
+            "clear" in description.lowercase(Locale.ROOT) -> R.drawable.sonnig
+            "cloud" in description.lowercase(Locale.ROOT) -> R.drawable.wolken
+            "sunny" in description.lowercase(Locale.ROOT) -> R.drawable.sonnig
+            "scattered" in description.lowercase(Locale.ROOT) -> R.drawable.teilweisewolken
+            "wind" in description.lowercase(Locale.ROOT) -> R.drawable.starkerwind
+            "tornado" in description.lowercase(Locale.ROOT) -> R.drawable.tornado
+            "storm" in description.lowercase(Locale.ROOT) -> R.drawable.storm
+            "snow" in description.lowercase(Locale.ROOT) -> R.drawable.schnee
+            "fog" in description.lowercase(Locale.ROOT) -> R.drawable.nebel
+            else -> R.drawable.teilweisewolken}}}
