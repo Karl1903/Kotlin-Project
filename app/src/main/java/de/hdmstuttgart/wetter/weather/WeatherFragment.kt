@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import com.bumptech.glide.Glide
 import de.hdmstuttgart.wetter.API.WeatherApi
 import de.hdmstuttgart.wetter.ApiClient
 import de.hdmstuttgart.wetter.Configuration
@@ -163,7 +164,25 @@ import kotlinx.coroutines.withContext
         descriptionTextView.text = "The weather: ${town.description}"
         temperatureTextView.text = "Temperature: ${town.temperature}"
         windtempoTextView.text = "wind tempo: ${town.windtempo}"
-        // Load weather icon with Glide.
+        // get the picture with Glide based on the description.
+        val iconResource = getIconResource(town.description)
+        Glide.with(requireContext())
+            .load(iconResource)
+            .into(iconImageView)
     }
+    private fun getIconResource(description: String): Int {
+        // There are different PNG files for each weather condition.
+        return when (description.toLowerCase()) {
+            "rain" -> R.drawable.rain
+            "cloud" -> R.drawable.wolken
+            "sunny" -> R.drawable.sonnig
+            "scattered" -> R.drawable.teilweisewolken
+            "wind" -> R.drawable.starkerwind
+            "tornado" -> R.drawable.tornado
+            "storm" -> R.drawable.storm
+            "snow" -> R.drawable.schnee
+            "fog" -> R.drawable.nebel
+            else -> R.drawable.teilweisewolken
+        }}
 
 }
