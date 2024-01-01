@@ -1,6 +1,5 @@
 package de.hdmstuttgart.wetter.weather
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -27,22 +26,24 @@ import de.hdmstuttgart.wetter.search.SearchActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.time.LocalDate
 import java.util.Locale
 
 
-//todo: create a Fragment that shows the weather data for one single town.
+//The Weather Fragment that shows the weather data for one single town
+// for the date right now.
 // 1.the activity with the fragment is started when the user clicks
-// on a town in the list
-//of the main activity.
+// the row with the town in the list in the main fragment.
 
-// 2.the activity with the fragment is started when the user clicks on a town in the search list
-// in the search fragment.
-    class WeatherFragment : Fragment() {
+// 2.the activity with the fragment is started when the user clicks
+// the button to search the data for the town in the search Fragment.
+class WeatherFragment : Fragment() {
 
     private lateinit var townNameTextView: TextView
     private lateinit var descriptionTextView: TextView
     private lateinit var temperatureTextView: TextView
     private lateinit var windtempoTextView: TextView
+    private lateinit var dateTextView: TextView
 
     private lateinit var iconImageView: ImageView
 
@@ -52,10 +53,10 @@ import java.util.Locale
     private var townName: String? = null
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
-            return inflater.inflate(R.layout.fragment_weather, container, false)
+        return inflater.inflate(R.layout.fragment_weather, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -67,6 +68,7 @@ import java.util.Locale
         temperatureTextView = view.findViewById(R.id.temperatureTextView)
         windtempoTextView = view.findViewById(R.id.windtempoTextView)
         iconImageView = view.findViewById(R.id.iconImageView)
+        dateTextView = view.findViewById(R.id.dateTextView)
 
         //weatherApi = ApiClient.instance?.create(weatherApi!!::class.java)
 
@@ -96,23 +98,23 @@ import java.util.Locale
                 }
             }}
 
-            val id = arguments?.getInt("id")
-            val name = arguments?.getString("name")
-            val description = arguments?.getString("description")
-            val temp = arguments?.getString("temp")
+        val id = arguments?.getInt("id")
+        val name = arguments?.getString("name")
+        val description = arguments?.getString("description")
+        val temp = arguments?.getString("temp")
 
-            // Load weather icon using Glide library
-          //  Glide.with(requireContext())
-          //      .load(getWeatherIconUrl(londonWeather.icon))
-          //      .into(weatherIconImageView)
+        // Load weather icon using Glide library
+        //  Glide.with(requireContext())
+        //      .load(getWeatherIconUrl(londonWeather.icon))
+        //      .into(weatherIconImageView)
         //}
 
         // Function to get the URL for the weather icon
-       // private fun getWeatherIconUrl(icon: String): String {
-       //     return "https://openweathermap.org/img/w/$icon.png"
+        // private fun getWeatherIconUrl(icon: String): String {
+        //     return "https://openweathermap.org/img/w/$icon.png"
 
 
-        }
+    }
 
     //private fun loadWeatherData(townName: String) {
     //    weatherApi?.getWeatherData(townName, apiKey)
@@ -152,17 +154,19 @@ import java.util.Locale
                     town = element
                 }
             }
-                 }
-                    return town
-                        }
+        }
+        return town
+    }
 
     private fun showErrorToast() {
         //Toast.makeText(this@WeatherFragment, "fail", Toast.LENGTH_SHORT).show()
     }
 
     private fun updateUI(town: Town) {
-        townNameTextView.text = "town name: ${town.name}"
-        descriptionTextView.text = "The weather: ${town.description}"
+        val date = LocalDate.now().toString()
+        dateTextView.text = "date: $date"
+        townNameTextView.text = "Location: ${town.name}"
+        descriptionTextView.text = "weather description: ${town.description}"
         temperatureTextView.text = "Temperature: ${town.temperature}"
         windtempoTextView.text = "wind tempo: ${town.windtempo}"
         // get the picture with Glide based on the description.
