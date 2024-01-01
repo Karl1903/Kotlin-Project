@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import de.hdmstuttgart.wetter.R
 import de.hdmstuttgart.wetter.Town.Town
-import de.hdmstuttgart.wetter.Town.TownDTO
 import de.hdmstuttgart.wetter.TownTrackerApplication
 import de.hdmstuttgart.wetter.weather.WeatherActivity
 import kotlinx.coroutines.Dispatchers
@@ -95,38 +94,35 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
            try {
             lifecycleScope.launch(Dispatchers.IO) {
                 Log.d("townName", "townName: $townName")
-                val response = townTrackerApplication.weatherApi.getWeatherData(townName, "cc5ef9e3576dc1e8bc30087dae5ee9ca")
+                val dataNow = townTrackerApplication.weatherApi.getWeatherData(townName, "cc5ef9e3576dc1e8bc30087dae5ee9ca")
+                val dataNextDays = townTrackerApplication.weatherApi.getWeatherResults(townName, "cc5ef9e3576dc1e8bc30087dae5ee9ca")
                 //val payload = response.search.toDomain()
-                val wetter1 = response.weather.toString()
-                val wetter2 = response.main.toString()
-                val wetter3 = response.wind.toString()
+                val wetter1 = dataNow.weather.toString()
+                val wetter2 = dataNow.main.toString()
+                val wetter3 = dataNow.wind.toString()
+                val wetter4 = dataNextDays.list[1].toString()
 
                 //val town = payload.search.map { return@map it.toDomain()}
                 Log.d("Description and Icon:", "description and icon: $wetter1")
                 Log.d("Temperature:", "Temperature: $wetter2")
                 Log.d("wind:", "wind: $wetter3")
+                Log.d("dataNext", "dataNext: $wetter4")
 
                 //The Weather Object is in a List so we need to access this List.
-                val weatherData = response.weather[0]
+                val weatherDataNow = dataNow.weather[0]
 
                 // the description is in the main value but additional in the description value.
-                val description = weatherData.main.toString() + ", " + weatherData.description.toString() + "."
+                val descriptionNow = weatherDataNow.main.toString() + ", " + weatherDataNow.description.toString() + "."
+
 
                 //The Temperature is given in Kelvin, se we need to substract
                 // -273,15 to get the value in Celsius.
                 //futhermore we need to cut the decimals (Nachkommastellen)
                 // to max. two decimals.
-                val temperatureKelvin = response.main?.temp
-                val temperatureNotCut = temperatureKelvin?.minus(273.15)
-                val temperatureString = ((temperatureNotCut?.times(100.0) ?: 0.0) / 100.0).roundToInt().toString()
-                var temperature = temperatureString + " degrees Celsius."
-                // 1 degree.
-                if (temperatureString == "1"){
-                    temperature = temperatureString + " degree Celsius."
-                }
+                val temperatureToday = formatTemperature(dataNow.main?.temp)
 
                 //wind speed.
-                val windtempoString = response.wind?.speed.toString()
+                val windtempoString = dataNow.wind?.speed.toString()
                 var windtempo = windtempoString + " meters per second."
                 // 1 meter.
                 if (windtempoString == "1" || windtempoString == "1.0" || windtempoString == "1.00"){
@@ -147,10 +143,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
                 // Take the data from the API response.
                 val townNew = Town(
-                    id = weatherData.id.toString(),
+                    id = weatherDataNow.id.toString(),
                     name = townName,
-                    description = description,
-                    temperature = temperature,
+                    description = descriptionNow,
+                    temperature = temperatureToday,
                     windtempo = windtempo
                 )
                 //Check if the Town already is in the database.
@@ -183,5 +179,20 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                Log.d("api call error message:", "api call error message: ${e.message}")
            }
         }
+    }
+
+    //The Temperature is given in Kelvin, se we need to substract
+    // -273,15 to get the value in Celsius.
+    //futhermore we need to cut the decimals (Nachkommastellen)
+    // to max. two decimals.
+    private fun formatTemperature(temperatureKelvin: Double?): String {
+        val temperatureNotCut = temperatureKelvin?.minus(273.15)
+        val temperatureString = ((temperatureNotCut?.times(100.0) ?: 0.0) / 100.0).roundToInt().toString()
+        var temperature = temperatureString + " degrees Celsius."
+        // 1 degree.
+        if (temperatureString == "1"){
+            temperature = temperatureString + " degree Celsius."
+        }
+        return temperature
     }
 }
