@@ -13,8 +13,8 @@ for today, next day plus the day after tomorrow.
 
 5. SearchFragment: Then the user is navigated to the WeatherFragment.
 
-6. WeatherFragment: There the weather data is retrieved from the database.That data is presented in the Layout. 
-Furthermore, the weather picture is retrieved from
+6. WeatherFragment: There the weather data is retrieved from the database.
+That data is presented in the Layout. Furthermore, the weather picture is retrieved from
 the folder which fits the description, weather description = rain --> picture = rain picture.
 
 7. MainFragment: Then, in the start menu of the appliaction the user is provided 
