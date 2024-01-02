@@ -101,7 +101,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 val wetter2 = dataNow.main.toString()
                 val wetter3 = dataNow.wind.toString()
                 //The api call for the next week data
-                val wetter4 = dataNextDays.cod.toString()
+                val wetter4 = dataNextDays.list[3].dtTxt.toString()
                 //val wetter6 = dataNextDays.list[1].toString()
 
                 //val town = payload.search.map { return@map it.toDomain()}
@@ -124,13 +124,9 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 // to max. two decimals.
                 val temperatureNow = formatTemperature(dataNow.main?.temp)
 
-                //wind speed.
-                val windtempoString = dataNow.wind?.speed.toString()
-                var windtempo = windtempoString + " meters per second."
-                // 1 meter.
-                if (windtempoString == "1" || windtempoString == "1.0" || windtempoString == "1.00"){
-                    windtempo = windtempoString + " meter per second."
-                }
+                //wind tempo format.
+                var windtempoNow = formatWindtempo(dataNow.wind?.speed.toString())
+
 
                 //to get a List. we dont need that 93%.
                 //val dataResponse = payload.search.map { return@map it.toDomain()}
@@ -148,10 +144,17 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                 val townNew = Town(
                     id = weatherDataNow.id.toString(),
                     name = townName,
-                    description = descriptionNow,
-                    temperature = temperatureNow,
-                    windtempo = windtempo
-                )
+                    descriptionNow = descriptionNow,
+                    temperatureNow = temperatureNow,
+                    windtempoNow = windtempoNow,
+                    //data for the next day..
+                    descriptionNextDay = descriptionNow,
+                    temperatureNextDay = temperatureNow,
+                    windtempoNextDay = windtempoNow,
+                    //data for the day after the next day..
+                    descriptionDayAfterNextDay = descriptionNow,
+                    temperatureDayAfterNextDay = temperatureNow,
+                    windtempoDayAfterNextDay = windtempoNow)
                 //Check if the Town already is in the database.
                 //If yes, delete the town and add it again cause the data
                 //may have changed for the weather in the meantime.
@@ -182,6 +185,16 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                Log.d("api call error message:", "api call error message: ${e.message}")
            }
         }
+    }
+
+    private fun formatWindtempo(windtempoString: String): String {
+        var windtempoNow = windtempoString + " meters per second."
+        // 1 meter.
+        if (windtempoString == "1" || windtempoString == "1.0" || windtempoString == "1.00"){
+            windtempoNow = windtempoString + " meter per second."
+        }
+        return windtempoNow
+
     }
 
     //The Temperature is given in Kelvin, se we need to substract

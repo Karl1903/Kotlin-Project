@@ -7,77 +7,126 @@
     android:layout_height="match_parent"
     tools:context=".weather.WeatherFragment">
 
-    <TextView
-        android:id="@+id/dateTextView"
-        android:layout_width="154dp"
-        android:layout_height="18dp"
-        android:layout_marginTop="120dp"
-        android:text="@string/date"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.062"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+    <!-- Location -->
     <TextView
         android:id="@+id/townNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="64dp"
         android:text="@string/cityName"
-        android:textSize="13dp"
+        android:textSize="23dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintHorizontal_bias="0.052"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dateTextView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/descriptionTextView"
+        android:id="@+id/descriptionTextViewNow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="13dp"
+        android:layout_marginTop="12dp"
         android:text="@string/description"
-        android:textSize="13dp"
+        android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.073"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateTextViewNow" />
+
+    <TextView
+        android:id="@+id/dateTextViewNow"
+        android:layout_width="154dp"
+        android:layout_height="18dp"
+        android:layout_marginTop="64dp"
+        android:text="@string/date"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/townNameTextView" />
 
     <TextView
-        android:id="@+id/temperatureTextView"
+        android:id="@+id/windtempoTextViewNow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/temperature"
-        android:textSize="13dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/wind_tempo"
+        android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.05"
+        app:layout_constraintHorizontal_bias="0.077"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/temperatureTextViewNow" />
 
     <TextView
-        android:id="@+id/windtempoTextView"
+        android:id="@+id/temperatureTextViewNow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/wind_tempo"
-        android:textSize="13dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/temperature"
+        android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintHorizontal_bias="0.075"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/temperatureTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/descriptionTextViewNow" />
 
     <ImageView
-        android:id="@+id/iconImageView"
+        android:id="@+id/iconImageViewNow"
         android:layout_width="125dp"
         android:layout_height="116dp"
         android:layout_marginTop="8dp"
-        android:contentDescription="picture of the weather description. sun, rain etc."
+        android:contentDescription="picture of the description. sun, rain etc."
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.944"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.156" />
+        app:layout_constraintVertical_bias="0.224" />
+
+    <LinearLayout
+        android:id="@+id/nextDayLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@+id/iconImageViewNow"
+        app:layout_constraintEnd_toEndOf="parent">
+
+    </LinearLayout>
+
+    <!-- DayAfterNextDay Properties -->
+
+    <ImageView
+        android:id="@+id/iconImageViewNextDay"
+        android:layout_width="105dp"
+        android:layout_height="79dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="12dp"
+        android:contentDescription="picture of the weather description. sun, rain etc."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/materialButton" />
+
+    <LinearLayout
+        android:id="@+id/dayAfterNextDayLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:layout_marginEnd="232dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nextDayLayout">
+
+    </LinearLayout>
+
+    <!-- Button -->
+
+    <ImageView
+        android:id="@+id/iconImageViewDayAfterNextDay"
+        android:layout_width="107dp"
+        android:layout_height="85dp"
+        android:layout_marginTop="104dp"
+        android:layout_marginEnd="12dp"
+        android:contentDescription="picture of the weather description. sun, rain etc."
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/iconImageViewNextDay" />
 
     <Button
         android:id="@+id/materialButton"
@@ -88,10 +137,101 @@
         android:text="@string/new_search"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.895"
+        app:layout_constraintHorizontal_bias="0.902"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.412" />
+        app:layout_constraintVertical_bias="0.428" />
 
+    <TextView
+        android:id="@+id/windtempoTextViewDayAfterNextDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/wind_tempo"
+        android:textSize="14dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/temperatureTextViewDayAfterNextDay" />
+
+    <TextView
+        android:id="@+id/descriptionTextViewDayAfterNextDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/description"
+        android:textSize="14dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateTextViewDayAfterNextDay" />
+
+    <TextView
+        android:id="@+id/temperatureTextViewDayAfterNextDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/temperature"
+        android:textSize="14dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionTextViewDayAfterNextDay" />
+
+    <TextView
+        android:id="@+id/dateTextViewDayAfterNextDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/date"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.083"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.797" />
+
+    <TextView
+        android:id="@+id/windtempoTextViewNextDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/wind_tempo"
+        android:textSize="14dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/temperatureTextViewNextDay" />
+
+    <TextView
+        android:id="@+id/temperatureTextViewNextDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/temperature"
+        android:textSize="14dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionTextViewNextDay" />
+
+    <TextView
+        android:id="@+id/descriptionTextViewNextDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/description"
+        android:textSize="14dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dateTextViewNextDay" />
+
+    <TextView
+        android:id="@+id/dateTextViewNextDay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/date"
+        android:textSize="14dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.065"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.535" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
