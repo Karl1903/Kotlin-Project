@@ -95,19 +95,21 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             lifecycleScope.launch(Dispatchers.IO) {
                 Log.d("townName", "townName: $townName")
                 val dataNow = townTrackerApplication.weatherApi.getWeatherData(townName, "cc5ef9e3576dc1e8bc30087dae5ee9ca")
-                //val dataNextDays = townTrackerApplication.weatherApi.getWeatherResults(townName, "cc5ef9e3576dc1e8bc30087dae5ee9ca")
+                val dataNextDays = townTrackerApplication.weatherApi.getWeatherResults(townName, "cc5ef9e3576dc1e8bc30087dae5ee9ca")
                 //val payload = response.search.toDomain()
                 val wetter1 = dataNow.weather.toString()
                 val wetter2 = dataNow.main.toString()
                 val wetter3 = dataNow.wind.toString()
                 //The api call for the next week data
-                //val wetter4 = dataNextDays.list[1].toString()
+                val wetter4 = dataNextDays.cod.toString()
+                //val wetter6 = dataNextDays.list[1].toString()
 
                 //val town = payload.search.map { return@map it.toDomain()}
                 Log.d("Description and Icon:", "description and icon: $wetter1")
                 Log.d("Temperature:", "Temperature: $wetter2")
                 Log.d("wind:", "wind: $wetter3")
-                //Log.d("dataNext", "dataNext: $wetter4")
+                Log.d("dataNext", "dataNext: $wetter4")
+                //Log.d("datadate", "datadate: $wetter6")
 
                 //The Weather Object is in a List so we need to access this List.
                 val weatherDataNow = dataNow.weather[0]

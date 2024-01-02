@@ -1,4 +1,4 @@
-package com.example.example
+package de.hdmstuttgart.wetter.datenmodellWeatherAPICall
 
 import com.google.gson.annotations.SerializedName
 
