@@ -212,7 +212,7 @@ class WeatherFragment : Fragment() {
         // get the picture with Glide based on the description.
         val iconResourceNextDay = getIconResource(town.descriptionNextDay)
         Glide.with(requireContext())
-            .load(iconResource)
+            .load(iconResourceNextDay)
             .into(iconImageViewNextDay)
 
         //Day after next day data:
@@ -224,7 +224,7 @@ class WeatherFragment : Fragment() {
         // get the picture with Glide based on the description.
         val iconResourceDayAfterNextDay = getIconResource(town.descriptionDayAfterNextDay)
         Glide.with(requireContext())
-            .load(iconResource)
+            .load(iconResourceDayAfterNextDay)
             .into(iconImageViewDayAfterNextDay)
 
     }
@@ -234,7 +234,7 @@ class WeatherFragment : Fragment() {
         val date = calendar.time
         calendar.setTime(date)
         calendar.add(Calendar.HOUR_OF_DAY, timeToAdd)
-        val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm")
+        val formatter = SimpleDateFormat("dd.MM.yyyy")
         return formatter.format(calendar.time)
     }
     private fun getIconResource(description: String): Int {
