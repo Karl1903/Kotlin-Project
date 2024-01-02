@@ -1,20 +1,24 @@
 
 Description 2-6 sentences:
 
-1. The Android Application that the project team seeks to develop targets the weather API from the openweathermap.org, gets data and parses the data.
+1. The Android Application that the project team seeks to develop targets the 
+weather API from the openweathermap.org, gets data and parses the data.
 
 2. SearchFragment: The user of the application can type in the town.
 
-3. SearchFragment: Then the user presses the button to get the weather data.
+3. SearchFragment: Then the user presses the button to get the weather data
+for today, next day plus the day after tomorrow.
 
 4. SearchFragment: the data gets saved into the local storage database.
 
 5. SearchFragment: Then the user is navigated to the WeatherFragment.
 
-6. WeatherFragment: There the weather data is retrieved from the database.That data is presented in the Layout. Furthermore, the weather picture is retrieved from
+6. WeatherFragment: There the weather data is retrieved from the database.That data is presented in the Layout. 
+Furthermore, the weather picture is retrieved from
 the folder which fits the description, weather description = rain --> picture = rain picture.
 
-7. MainFragment: Then, in the start menu of the appliaction the user is provided with his recent searches in a list (local storage).
+7. MainFragment: Then, in the start menu of the appliaction the user is provided 
+with his recent searches in a list (local storage).
 The row shows the name of the town that was searched for. Liverpool, San Francisco..
 
 8. MainFragment: So if the user clicks a row, she is navigated to the WeatherFragment.
