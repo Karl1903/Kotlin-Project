@@ -1,8 +1,8 @@
 package de.hdmstuttgart.wetter.API
 
-import com.example.example.WeatherDataToday
 import de.hdmstuttgart.wetter.Configuration
-import de.hdmstuttgart.wetter.datenmodellForecastApiCall.WeatherDataForecast
+import de.hdmstuttgart.wetter.datenmodellWeatherAPICall.WeatherDataToday
+import de.hdmstuttgart.wetter.datenmodellneuForecast.WeatherDataNextWeek
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -26,5 +26,5 @@ public interface WeatherApi {
     suspend fun getWeatherResults(
         @Query("q") townName: String,
         @Query("appid") apikey: String = Configuration.API_KEY
-    ): WeatherDataForecast;
+    ): WeatherDataNextWeek;
 }

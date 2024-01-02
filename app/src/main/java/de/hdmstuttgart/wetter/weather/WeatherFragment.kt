@@ -11,22 +11,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import de.hdmstuttgart.wetter.API.WeatherApi
-import de.hdmstuttgart.wetter.ApiClient
 import de.hdmstuttgart.wetter.Configuration
-import de.hdmstuttgart.wetter.MainActivity
 import de.hdmstuttgart.wetter.R
 import de.hdmstuttgart.wetter.Town.Town
-import de.hdmstuttgart.wetter.Town.TownDTO
-import de.hdmstuttgart.wetter.Town.TownDao
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import de.hdmstuttgart.wetter.TownTrackerApplication
-import de.hdmstuttgart.wetter.search.SearchActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.time.LocalDate
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 
@@ -40,12 +34,26 @@ import java.util.Locale
 class WeatherFragment : Fragment() {
 
     private lateinit var townNameTextView: TextView
-    private lateinit var descriptionTextView: TextView
-    private lateinit var temperatureTextView: TextView
-    private lateinit var windtempoTextView: TextView
-    private lateinit var dateTextView: TextView
+    private lateinit var descriptionTextViewNow: TextView
+    private lateinit var temperatureTextViewNow: TextView
+    private lateinit var windtempoTextViewNow: TextView
+    private lateinit var dateTextViewNow: TextView
 
-    private lateinit var iconImageView: ImageView
+    private lateinit var iconImageViewNow: ImageView
+
+    private lateinit var descriptionTextViewNextDay: TextView
+    private lateinit var temperatureTextViewNextDay: TextView
+    private lateinit var windtempoTextViewNextDay: TextView
+    private lateinit var dateTextViewNextDay: TextView
+
+    private lateinit var iconImageViewNextDay: ImageView
+
+    private lateinit var descriptionTextViewDayAfterNextDay: TextView
+    private lateinit var temperatureTextViewDayAfterNextDay: TextView
+    private lateinit var windtempoTextViewDayAfterNextDay: TextView
+    private lateinit var dateTextViewDayAfterNextDay: TextView
+
+    private lateinit var iconImageViewDayAfterNextDay: ImageView
 
     private var weatherApi: WeatherApi? = null
     private val apiKey = Configuration.API_KEY
@@ -64,11 +72,23 @@ class WeatherFragment : Fragment() {
 
         // Find views in the layout.
         townNameTextView = view.findViewById(R.id.townNameTextView)
-        descriptionTextView = view.findViewById(R.id.descriptionTextView)
-        temperatureTextView = view.findViewById(R.id.temperatureTextView)
-        windtempoTextView = view.findViewById(R.id.windtempoTextView)
-        iconImageView = view.findViewById(R.id.iconImageView)
-        dateTextView = view.findViewById(R.id.dateTextView)
+        descriptionTextViewNow = view.findViewById(R.id.descriptionTextViewNow)
+        temperatureTextViewNow = view.findViewById(R.id.temperatureTextViewNow)
+        windtempoTextViewNow = view.findViewById(R.id.windtempoTextViewNow)
+        iconImageViewNow = view.findViewById(R.id.iconImageViewNow)
+        dateTextViewNow = view.findViewById(R.id.dateTextViewNow)
+
+        descriptionTextViewNextDay = view.findViewById(R.id.descriptionTextViewNextDay)
+        temperatureTextViewNextDay = view.findViewById(R.id.temperatureTextViewNextDay)
+        windtempoTextViewNextDay = view.findViewById(R.id.windtempoTextViewNextDay)
+        iconImageViewNextDay = view.findViewById(R.id.iconImageViewNextDay)
+        dateTextViewNextDay = view.findViewById(R.id.dateTextViewNextDay)
+
+        descriptionTextViewDayAfterNextDay = view.findViewById(R.id.descriptionTextViewDayAfterNextDay)
+        temperatureTextViewDayAfterNextDay = view.findViewById(R.id.temperatureTextViewDayAfterNextDay)
+        windtempoTextViewDayAfterNextDay = view.findViewById(R.id.windtempoTextViewDayAfterNextDay)
+        iconImageViewDayAfterNextDay = view.findViewById(R.id.iconImageViewDayAfterNextDay)
+        dateTextViewDayAfterNextDay = view.findViewById(R.id.dateTextViewDayAfterNextDay)
 
         //weatherApi = ApiClient.instance?.create(weatherApi!!::class.java)
 
@@ -98,7 +118,7 @@ class WeatherFragment : Fragment() {
                 }
             }}
 
-        val id = arguments?.getInt("id")
+        //val id = arguments?.getInt("id")
         val name = arguments?.getString("name")
         val description = arguments?.getString("description")
         val temp = arguments?.getString("temp")
@@ -140,11 +160,19 @@ class WeatherFragment : Fragment() {
     //now we just need to get it from the local storage to show it in the weather fragment.
     private fun loadWeatherData(townName: String): Town {
         var town = Town(key = 0,
-            id= "1",
-            name = "",
-            description = "",
-            temperature = "",
-            windtempo = "")
+            id= "id",
+            name = "townName",
+            descriptionNow = "descriptionNow",
+            temperatureNow = "temperatureNow",
+            windtempoNow = "windtempoNow",
+            //data for the next day..
+            descriptionNextDay = "descriptionNextDay",
+            temperatureNextDay = "temperatureNextDay",
+            windtempoNextDay = "windtempoNextDay",
+            //data for the day after the next day..
+            descriptionDayAfterNextDay = "descriptionDayAfterNextDay",
+            temperatureDayAfterNextDay = "temperatureDayAfterNextDay",
+            windtempoDayAfterNextDay = "windtempoDayAfterNextDay")
         activity?.let { it ->
             val townTrackerApplication = it.application as TownTrackerApplication
             val towns = townTrackerApplication.repository.getTowns()
@@ -163,17 +191,51 @@ class WeatherFragment : Fragment() {
     }
 
     private fun updateUI(town: Town) {
-        val date = LocalDate.now().toString()
-        dateTextView.text = "date: $date"
+        val dateNow = addTimeToTheDate(0)
         townNameTextView.text = "Location: ${town.name}"
-        descriptionTextView.text = "weather description: ${town.description}"
-        temperatureTextView.text = "Temperature: ${town.temperature}"
-        windtempoTextView.text = "wind tempo: ${town.windtempo}"
+        dateTextViewNow.text = "date: $dateNow"
+        descriptionTextViewNow.text = "weather description: ${town.descriptionNow}"
+        temperatureTextViewNow.text = "Temperature: ${town.temperatureNow}"
+        windtempoTextViewNow.text = "wind tempo: ${town.windtempoNow}"
         // get the picture with Glide based on the description.
-        val iconResource = getIconResource(town.description)
+        val iconResource = getIconResource(town.descriptionNow)
         Glide.with(requireContext())
             .load(iconResource)
-            .into(iconImageView)
+            .into(iconImageViewNow)
+
+        //Next day data:
+        val dateNextDay = addTimeToTheDate(24)
+        dateTextViewNextDay.text = "date: $dateNextDay"
+        descriptionTextViewNextDay.text = "weather description: ${town.descriptionNextDay}"
+        temperatureTextViewNextDay.text = "Temperature: ${town.temperatureNextDay}"
+        windtempoTextViewNextDay.text = "wind tempo: ${town.windtempoNextDay}"
+        // get the picture with Glide based on the description.
+        val iconResourceNextDay = getIconResource(town.descriptionNextDay)
+        Glide.with(requireContext())
+            .load(iconResourceNextDay)
+            .into(iconImageViewNextDay)
+
+        //Day after next day data:
+        val dateDayAfterNextDay = addTimeToTheDate(48)
+        dateTextViewDayAfterNextDay.text = "date: $dateDayAfterNextDay"
+        descriptionTextViewDayAfterNextDay.text = "weather description: ${town.descriptionDayAfterNextDay}"
+        temperatureTextViewDayAfterNextDay.text = "Temperature: ${town.temperatureDayAfterNextDay}"
+        windtempoTextViewDayAfterNextDay.text = "wind tempo: ${town.windtempoDayAfterNextDay}"
+        // get the picture with Glide based on the description.
+        val iconResourceDayAfterNextDay = getIconResource(town.descriptionDayAfterNextDay)
+        Glide.with(requireContext())
+            .load(iconResourceDayAfterNextDay)
+            .into(iconImageViewDayAfterNextDay)
+
+    }
+
+    private fun addTimeToTheDate(timeToAdd: Int): String {
+        val calendar: Calendar = Calendar.getInstance()
+        val date = calendar.time
+        calendar.setTime(date)
+        calendar.add(Calendar.HOUR_OF_DAY, timeToAdd)
+        val formatter = SimpleDateFormat("dd.MM.yyyy")
+        return formatter.format(calendar.time)
     }
     private fun getIconResource(description: String): Int {
         // There are different PNG files for each weather condition.

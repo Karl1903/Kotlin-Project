@@ -18,10 +18,19 @@ import com.google.gson.annotations.SerializedName
 data class TownDTO (
     @SerializedName("id") val id: String,
     @SerializedName("name") val name: String,
-    @SerializedName("description") val description: String,
+    //data for now..
+    @SerializedName("description") val descriptionNow: String,
     //temperature
-    @SerializedName("temperature") val temperature: String,
-    @SerializedName("windtempo") val windtempo: String,
+    @SerializedName("temperature") val temperatureNow: String,
+    @SerializedName("windtempo") val windtempoNow: String,
+    //data for the next day..
+    @SerializedName("description") val descriptionNextDay: String,
+    @SerializedName("temperature") val temperatureNextDay: String,
+    @SerializedName("windtempo") val windtempoNextDay: String,
+    //data for the day after the next day..
+    @SerializedName("description") val descriptionDayAfterNextDay: String,
+    @SerializedName("temperature") val temperatureDayAfterNextDay: String,
+    @SerializedName("windtempo") val windtempoDayAfterNextDay: String,
     // we can add an icon from the folder res.drawable.
     //@SerializedName("icon") val icon: String? = null,
 )
@@ -30,8 +39,14 @@ data class TownDTO (
         return Town(
             id = id,
             name = name,
-            description = description,
-            temperature = temperature,
-            windtempo = windtempo)
+            descriptionNow = descriptionNow,
+            temperatureNow = temperatureNow,
+            windtempoNow = windtempoNow,
+            descriptionNextDay = descriptionNextDay,
+            temperatureNextDay = temperatureNextDay,
+            windtempoNextDay = windtempoNextDay,
+            descriptionDayAfterNextDay = descriptionDayAfterNextDay,
+            temperatureDayAfterNextDay = temperatureDayAfterNextDay,
+            windtempoDayAfterNextDay = windtempoDayAfterNextDay)
     }
 }
