@@ -11,22 +11,16 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import de.hdmstuttgart.wetter.API.WeatherApi
-import de.hdmstuttgart.wetter.ApiClient
 import de.hdmstuttgart.wetter.Configuration
-import de.hdmstuttgart.wetter.MainActivity
 import de.hdmstuttgart.wetter.R
 import de.hdmstuttgart.wetter.Town.Town
-import de.hdmstuttgart.wetter.Town.TownDTO
-import de.hdmstuttgart.wetter.Town.TownDao
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 import de.hdmstuttgart.wetter.TownTrackerApplication
-import de.hdmstuttgart.wetter.search.SearchActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.time.LocalDate
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 
@@ -197,9 +191,9 @@ class WeatherFragment : Fragment() {
     }
 
     private fun updateUI(town: Town) {
-        val date = LocalDate.now().toString()
+        val dateNow = addTimeToTheDate(0)
         townNameTextView.text = "Location: ${town.name}"
-        dateTextViewNow.text = "date: $date"
+        dateTextViewNow.text = "date: $dateNow"
         descriptionTextViewNow.text = "weather description: ${town.descriptionNow}"
         temperatureTextViewNow.text = "Temperature: ${town.temperatureNow}"
         windtempoTextViewNow.text = "wind tempo: ${town.windtempoNow}"
@@ -210,7 +204,8 @@ class WeatherFragment : Fragment() {
             .into(iconImageViewNow)
 
         //Next day data:
-        dateTextViewNextDay.text = "date: $date"
+        val dateNextDay = addTimeToTheDate(24)
+        dateTextViewNextDay.text = "date: $dateNextDay"
         descriptionTextViewNextDay.text = "weather description: ${town.descriptionNextDay}"
         temperatureTextViewNextDay.text = "Temperature: ${town.temperatureNextDay}"
         windtempoTextViewNextDay.text = "wind tempo: ${town.windtempoNextDay}"
@@ -221,7 +216,8 @@ class WeatherFragment : Fragment() {
             .into(iconImageViewNextDay)
 
         //Day after next day data:
-        dateTextViewDayAfterNextDay.text = "date: $date"
+        val dateDayAfterNextDay = addTimeToTheDate(48)
+        dateTextViewDayAfterNextDay.text = "date: $dateDayAfterNextDay"
         descriptionTextViewDayAfterNextDay.text = "weather description: ${town.descriptionDayAfterNextDay}"
         temperatureTextViewDayAfterNextDay.text = "Temperature: ${town.temperatureDayAfterNextDay}"
         windtempoTextViewDayAfterNextDay.text = "wind tempo: ${town.windtempoDayAfterNextDay}"
@@ -231,6 +227,15 @@ class WeatherFragment : Fragment() {
             .load(iconResource)
             .into(iconImageViewDayAfterNextDay)
 
+    }
+
+    private fun addTimeToTheDate(timeToAdd: Int): String {
+        val calendar: Calendar = Calendar.getInstance()
+        val date = calendar.time
+        calendar.setTime(date)
+        calendar.add(Calendar.HOUR_OF_DAY, timeToAdd)
+        val formatter = SimpleDateFormat("dd.MM.yyyy HH:mm")
+        return formatter.format(calendar.time)
     }
     private fun getIconResource(description: String): Int {
         // There are different PNG files for each weather condition.
