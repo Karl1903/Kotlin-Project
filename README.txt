@@ -21,7 +21,7 @@ the folder which fits the description, weather description = rain --> picture = 
 with his recent searches in a list (local storage).
 The row shows the name of the town that was searched for. Liverpool, San Francisco..
 
-8. MainFragment: So if the user clicks a row, she is navigated to the WeatherFragment.
+8. MainFragment: So if the user clicks the row, she is navigated to the WeatherFragment.
 
 9. WeatherFragment: There the data for the weather is presented.
 
