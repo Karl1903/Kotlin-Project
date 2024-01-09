@@ -6,8 +6,11 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.test.internal.runner.junit4.statement.UiThreadStatement.runOnUiThread
+import de.hdmstuttgart.wetter.MainActivity
 import de.hdmstuttgart.wetter.R
 import de.hdmstuttgart.wetter.Town.Town
 import de.hdmstuttgart.wetter.TownTrackerApplication
@@ -23,7 +26,7 @@ import kotlin.math.roundToInt
 class SearchFragment : Fragment(R.layout.fragment_search) {
 
     //private val data = ArrayList<Town>()
-
+    private var message = ""
     //private val adapter = TownAdapter(ArrayList<Town>())
 
     //Town(-weather) search with town-name and button click.
@@ -47,11 +50,14 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             val searchTownEditText = view.findViewById<EditText>(R.id.searchWeatherTownEditText)
             val searchTownText = searchTownEditText.text.toString()
 
+
             //Search the town that fits to the text the user writes.
             //Then, the weather data for this town is saved to the database.
             //Then, the user is navigated to the weather activity.
             //there, the data is retrieved from the database and presented.
-            searchTown(searchTownText)
+
+                searchTown(searchTownText)
+
 
         }
     }
@@ -89,121 +95,144 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private fun searchTown(townName: String) {
 
        activity?.let { it ->
-            val townTrackerApplication = it.application as TownTrackerApplication
-
-           try {
-            lifecycleScope.launch(Dispatchers.IO) {
-                Log.d("townName", "townName: $townName")
-                val dataNow = townTrackerApplication.weatherApi.getWeatherData(townName, "cc5ef9e3576dc1e8bc30087dae5ee9ca")
-                val dataNextWeek = townTrackerApplication.weatherApi.getWeatherResults(townName, "cc5ef9e3576dc1e8bc30087dae5ee9ca")
-                //val payload = response.search.toDomain()
-                //Test JSON Data.
-                //val wetter1 = dataNow.weather.toString()
-                //val wetter2 = dataNow.main.toString()
-                //val wetter3 = dataNow.wind.toString()
-                //The data for the next day.
-                //val wetter4 = dataNextWeek.list[3].main?.temp.toString()
-                //the data for next next day.
-                //val wetter10 = dataNextWeek.list[10].toString()
-
-                //val town = payload.search.map { return@map it.toDomain()}
-                //Log.d("Description and Icon:", "description and icon: $wetter1")
-                //Log.d("Temperature:", "Temperature: $wetter2")
-                //Log.d("wind:", "wind: $wetter3")
-                //Log.d("dataNext", "dataNext: $wetter10")
+           val townTrackerApplication = it.application as TownTrackerApplication
 
 
-                //The Weather Object Next Day is in a List so we need to access this List.
-                val dataNextDay = dataNextWeek.list[3]
-                //the data for next next day.
-                val dataNextNextDay = dataNextWeek.list[10]
-                //data next day
-                //val dataNextDay =
-                //data next next day
-                //val data
+           lifecycleScope.launch(Dispatchers.IO) {
+               try {
+               Log.d("townName", "townName: $townName")
+               val dataNow = townTrackerApplication.weatherApi.getWeatherData(
+                   townName,
+                   "cc5ef9e3576dc1e8bc30087dae5ee9ca"
+               )
+               val dataNextWeek = townTrackerApplication.weatherApi.getWeatherResults(
+                   townName,
+                   "cc5ef9e3576dc1e8bc30087dae5ee9ca"
+               )
 
-                val wetterTraditionell = dataNextDay.weather[0].description.toString()
-                //val wetter1 = dataNextDay.weather[1].description.toString()
-                Log.d("Wetter traditionell", "Wetter traditionell: $wetterTraditionell")
-                //Log.d("Wetter 1", "Wetter 1: $wetter1")
+               //val payload = response.search.toDomain()
+               //Test JSON Data.
+               //val wetter1 = dataNow.weather.toString()
+               //val wetter2 = dataNow.main.toString()
+               //val wetter3 = dataNow.wind.toString()
+               //The data for the next day.
+               //val wetter4 = dataNextWeek.list[3].main?.temp.toString()
+               //the data for next next day.
+               //val wetter10 = dataNextWeek.list[10].toString()
 
-                // the description is in the main value but additional in the description value.
-                val descriptionNow = dataNow.weather[0].main.toString() + ", " + dataNow.weather[0].description.toString() + "."
-                val descriptionNextDay = dataNextDay.weather[0].description.toString() + "."
-                val descriptionDayAfterNextDay = dataNextNextDay.weather[0].description.toString() + "."
-
-                //The Temperature is given in Kelvin, se we need to substract
-                // -273,15 to get the value in Celsius.
-                //futhermore we need to cut the decimals (Nachkommastellen)
-                // to max. two decimals.
-                val temperatureNow = formatTemperature(dataNow.main?.temp)
-                val temperatureNextDay = formatTemperature(dataNextDay.main?.temp)
-                val temperatureDayAfterNextDay = formatTemperature(dataNextNextDay.main?.temp)
-
-                //wind tempo format.
-                var windtempoNow = formatWindtempo(dataNow.wind?.speed.toString())
-                var windtempoNextDay = formatWindtempo(dataNextDay.wind?.speed.toString())
-                var windtempoDayAfterNextDay = formatWindtempo(dataNextNextDay.wind?.speed.toString())
+               //val town = payload.search.map { return@map it.toDomain()}
+               //Log.d("Description and Icon:", "description and icon: $wetter1")
+               //Log.d("Temperature:", "Temperature: $wetter2")
+               //Log.d("wind:", "wind: $wetter3")
+               //Log.d("dataNext", "dataNext: $wetter10")
 
 
-                //to get a List. we dont need that 93%.
-                //val dataResponse = payload.search.map { return@map it.toDomain()}
+               //The Weather Object Next Day is in a List so we need to access this List.
+               val dataNextDay = dataNextWeek.list[3]
+               //the data for next next day.
+               val dataNextNextDay = dataNextWeek.list[10]
+               //data next day
+               //val dataNextDay =
+               //data next next day
+               //val data
+
+               val wetterTraditionell = dataNextDay.weather[0].description.toString()
+               //val wetter1 = dataNextDay.weather[1].description.toString()
+               Log.d("Wetter traditionell", "Wetter traditionell: $wetterTraditionell")
+               //Log.d("Wetter 1", "Wetter 1: $wetter1")
+
+               // the description is in the main value but additional in the description value.
+               val descriptionNow =
+                   dataNow.weather[0].main.toString() + ", " + dataNow.weather[0].description.toString() + "."
+               val descriptionNextDay = dataNextDay.weather[0].description.toString() + "."
+               val descriptionDayAfterNextDay =
+                   dataNextNextDay.weather[0].description.toString() + "."
+
+               //The Temperature is given in Kelvin, se we need to substract
+               // -273,15 to get the value in Celsius.
+               //futhermore we need to cut the decimals (Nachkommastellen)
+               // to max. two decimals.
+               val temperatureNow = formatTemperature(dataNow.main?.temp)
+               val temperatureNextDay = formatTemperature(dataNextDay.main?.temp)
+               val temperatureDayAfterNextDay = formatTemperature(dataNextNextDay.main?.temp)
+
+               //wind tempo format.
+               var windtempoNow = formatWindtempo(dataNow.wind?.speed.toString())
+               var windtempoNextDay = formatWindtempo(dataNextDay.wind?.speed.toString())
+               var windtempoDayAfterNextDay =
+                   formatWindtempo(dataNextNextDay.wind?.speed.toString())
+
+
+               //to get a List. we dont need that 93%.
+               //val dataResponse = payload.search.map { return@map it.toDomain()}
 
                //Log.d("Data wetter:", "data wetter: $dataResponse")
 
-                //val townDTO = TownDTO(
-                  //          keyID = 1,
-                  //          id = 1,
-                  //          name = "London",
-                  //          description = "sunny",
-                  //          temperature = "13C")
+               //val townDTO = TownDTO(
+               //          keyID = 1,
+               //          id = 1,
+               //          name = "London",
+               //          description = "sunny",
+               //          temperature = "13C")
 
-                // Take the data from the API response.
-                val townNew = Town(
-                    id = dataNow.id.toString(),
-                    name = townName,
-                    descriptionNow = descriptionNow,
-                    temperatureNow = temperatureNow,
-                    windtempoNow = windtempoNow,
-                    //data for the next day..
-                    descriptionNextDay = descriptionNextDay,
-                    temperatureNextDay = temperatureNextDay,
-                    windtempoNextDay = windtempoNextDay,
-                    //data for the day after the next day..
-                    descriptionDayAfterNextDay = descriptionDayAfterNextDay,
-                    temperatureDayAfterNextDay = temperatureDayAfterNextDay,
-                    windtempoDayAfterNextDay = windtempoDayAfterNextDay)
-                //Check if the Town already is in the database.
-                //If yes, delete the town and add it again cause the data
-                //may have changed for the weather in the meantime.
-                //if not, just put the retrieved town-data into the Room database.
-                val towns = townTrackerApplication.repository.getTowns()
-                for (town in towns){
-                    if(town.name == townName){
-                        townTrackerApplication.repository.delete(town)
-                }}
-                townTrackerApplication.repository.insert(townNew)
+               // Take the data from the API response.
+               val townNew = Town(
+                   id = dataNow.id.toString(),
+                   name = townName,
+                   descriptionNow = descriptionNow,
+                   temperatureNow = temperatureNow,
+                   windtempoNow = windtempoNow,
+                   //data for the next day..
+                   descriptionNextDay = descriptionNextDay,
+                   temperatureNextDay = temperatureNextDay,
+                   windtempoNextDay = windtempoNextDay,
+                   //data for the day after the next day..
+                   descriptionDayAfterNextDay = descriptionDayAfterNextDay,
+                   temperatureDayAfterNextDay = temperatureDayAfterNextDay,
+                   windtempoDayAfterNextDay = windtempoDayAfterNextDay
+               )
+               //Check if the Town already is in the database.
+               //If yes, delete the town and add it again cause the data
+               //may have changed for the weather in the meantime.
+               //if not, just put the retrieved town-data into the Room database.
+               val towns = townTrackerApplication.repository.getTowns()
+               for (town in towns) {
+                   if (town.name == townName) {
+                       townTrackerApplication.repository.delete(town)
+                   }
+               }
+               townTrackerApplication.repository.insert(townNew)
 
-                //withContext(Dispatchers.Main){
-                    //adapter.notifyDataSetChanged()
+               //withContext(Dispatchers.Main){
+               //adapter.notifyDataSetChanged()
                // }
 
-                //Navigates to the weather activity.
-                activity?.let {
-                    val intent = Intent(it, WeatherActivity::class.java)
-                    // the key townName with
-                    // the data is passed to the WeatherActivity.
-                    intent.putExtra("townName", townName)
-                    it.startActivity(intent)
-                }
-            }
-
-           } catch (e: Exception) {
-               // Handle API call failure or parsing error
-               Log.d("api call error message:", "api call error message: ${e.message}")
+               //Navigates to the weather activity.
+               activity?.let {
+                   val intent = Intent(it, WeatherActivity::class.java)
+                   // the key townName with
+                   // the data is passed to the WeatherActivity.
+                   intent.putExtra("townName", townName)
+                   it.startActivity(intent)
+               }
+               }  catch (e: Exception) {
+                   // Handle API call failure or parsing error
+                   Log.d("api call error message:", "api call error message: ${e.message}")
+                   it.runOnUiThread {
+                       Toast.makeText(
+                           requireContext(),
+                           "Please provide the valid Name for the Town.",
+                           Toast.LENGTH_SHORT
+                       ).show()
+                   }
+               }
            }
+
+
+           }
+
         }
-    }
+
 
     private fun formatWindtempo(windtempoString: String): String {
         var windtempoNow = windtempoString + " meters per second."
