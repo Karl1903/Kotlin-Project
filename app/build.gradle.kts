@@ -44,7 +44,10 @@ dependencies {
     implementation("androidx.test.espresso:espresso-contrib:3.5.1")
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    //androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    androidTestImplementation("androidx.test:runner:1.4.0")
+    androidTestImplementation("androidx.test:rules:1.4.0")
     implementation("androidx.room:room-runtime:2.5.2")
     implementation("androidx.room:room-ktx:2.5.2")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
@@ -52,8 +55,7 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.11.0")
     ksp("com.github.bumptech.glide:compiler:4.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
-    implementation("com.squareup.retrofit2:retrofit:2.9.0")}}
-dependencies {
+    implementation("com.squareup.retrofit2:retrofit:2.9.0")
     implementation("androidx.test.ext:junit-ktx:1.1.5")
-}
+}}
 
