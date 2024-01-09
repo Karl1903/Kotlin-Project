@@ -53,4 +53,7 @@ dependencies {
     ksp("com.github.bumptech.glide:compiler:4.11.0")
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.retrofit2:retrofit:2.9.0")}}
+dependencies {
+    implementation("androidx.test.ext:junit-ktx:1.1.5")
+}
 

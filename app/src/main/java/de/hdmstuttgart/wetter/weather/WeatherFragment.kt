@@ -193,10 +193,10 @@ class WeatherFragment : Fragment() {
     private fun updateUI(town: Town) {
         val dateNow = addTimeToTheDate(0)
         townNameTextView.text = "Location: ${town.name}"
-        dateTextViewNow.text = "date: $dateNow"
-        descriptionTextViewNow.text = "weather description: ${town.descriptionNow}"
+        dateTextViewNow.text = "Date: $dateNow"
+        descriptionTextViewNow.text = "Weather description: ${town.descriptionNow}"
         temperatureTextViewNow.text = "Temperature: ${town.temperatureNow}"
-        windtempoTextViewNow.text = "wind tempo: ${town.windtempoNow}"
+        windtempoTextViewNow.text = "Wind tempo: ${town.windtempoNow}"
         // get the picture with Glide based on the description.
         val iconResource = getIconResource(town.descriptionNow)
         Glide.with(requireContext())
@@ -205,10 +205,10 @@ class WeatherFragment : Fragment() {
 
         //Next day data:
         val dateNextDay = addTimeToTheDate(24)
-        dateTextViewNextDay.text = "date: $dateNextDay"
-        descriptionTextViewNextDay.text = "weather description: ${town.descriptionNextDay}"
+        dateTextViewNextDay.text = "Date: $dateNextDay"
+        descriptionTextViewNextDay.text = "Weather description: ${town.descriptionNextDay}"
         temperatureTextViewNextDay.text = "Temperature: ${town.temperatureNextDay}"
-        windtempoTextViewNextDay.text = "wind tempo: ${town.windtempoNextDay}"
+        windtempoTextViewNextDay.text = "Wind tempo: ${town.windtempoNextDay}"
         // get the picture with Glide based on the description.
         val iconResourceNextDay = getIconResource(town.descriptionNextDay)
         Glide.with(requireContext())
@@ -217,10 +217,10 @@ class WeatherFragment : Fragment() {
 
         //Day after next day data:
         val dateDayAfterNextDay = addTimeToTheDate(48)
-        dateTextViewDayAfterNextDay.text = "date: $dateDayAfterNextDay"
-        descriptionTextViewDayAfterNextDay.text = "weather description: ${town.descriptionDayAfterNextDay}"
+        dateTextViewDayAfterNextDay.text = "Date: $dateDayAfterNextDay"
+        descriptionTextViewDayAfterNextDay.text = "Weather description: ${town.descriptionDayAfterNextDay}"
         temperatureTextViewDayAfterNextDay.text = "Temperature: ${town.temperatureDayAfterNextDay}"
-        windtempoTextViewDayAfterNextDay.text = "wind tempo: ${town.windtempoDayAfterNextDay}"
+        windtempoTextViewDayAfterNextDay.text = "Wind tempo: ${town.windtempoDayAfterNextDay}"
         // get the picture with Glide based on the description.
         val iconResourceDayAfterNextDay = getIconResource(town.descriptionDayAfterNextDay)
         Glide.with(requireContext())
