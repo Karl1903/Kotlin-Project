@@ -4,44 +4,75 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainFragment">
-
+    tools:context=".MainFragment"
+    android:background="@drawable/gradient_background">
 
     <Button
         android:id="@+id/searchBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="229dp"
+        android:layout_height="54dp"
+        android:backgroundTint="#D97BF0"
         android:onClick="onSearchTownClick"
         android:text="@string/search_for_the_town"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.876"
+        app:layout_constraintHorizontal_bias="0.513"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.311" />
+        app:layout_constraintVertical_bias="0.578" />
+
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/homeRecyclerView"
-        android:layout_width="396dp"
-        android:layout_height="513dp"
+        android:layout_width="371dp"
+        android:layout_height="510dp"
+        android:layout_marginTop="16dp"
+        android:textColor="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.466"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/searchBtn"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/startTextView"
+        android:id="@+id/startTextViewWeather"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Weather Application - Search for the town and we tell get the Data for the weather there!"
-        android:textSize="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="284dp"
+        android:text="Weather"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="40dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/startTextViewForecast"
+        android:layout_width="182dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="44dp"
+        android:text="Forecasts"
+        android:textAlignment="center"
+        android:textColor="#D97BF0"
+        android:textSize="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/startTextViewWeather" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="275dp"
+        android:layout_height="244dp"
+        android:src="@drawable/wettericon"
+        app:layout_constraintBottom_toTopOf="@+id/startTextViewWeather"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.209" />
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
