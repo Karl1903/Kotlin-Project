@@ -10,8 +10,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
-import de.hdmstuttgart.wetter.API.WeatherApi
 import de.hdmstuttgart.wetter.API.Configuration
+import de.hdmstuttgart.wetter.API.WeatherApi
 import de.hdmstuttgart.wetter.R
 import de.hdmstuttgart.wetter.Town.Town
 import de.hdmstuttgart.wetter.TownTrackerApplication

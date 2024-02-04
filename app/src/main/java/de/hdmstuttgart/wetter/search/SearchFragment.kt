@@ -9,8 +9,6 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.test.internal.runner.junit4.statement.UiThreadStatement.runOnUiThread
-import de.hdmstuttgart.wetter.MainActivity
 import de.hdmstuttgart.wetter.R
 import de.hdmstuttgart.wetter.Town.Town
 import de.hdmstuttgart.wetter.TownTrackerApplication
