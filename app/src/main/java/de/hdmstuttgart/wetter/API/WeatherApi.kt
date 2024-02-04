@@ -1,9 +1,7 @@
 package de.hdmstuttgart.wetter.API
 
-import de.hdmstuttgart.wetter.Configuration
 import de.hdmstuttgart.wetter.datenmodellWeatherAPICall.WeatherDataToday
 import de.hdmstuttgart.wetter.datenmodellneuForecast.WeatherDataNextWeek
-import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query
 

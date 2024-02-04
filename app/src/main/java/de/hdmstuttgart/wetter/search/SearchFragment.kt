@@ -22,7 +22,6 @@ import kotlin.math.roundToInt
 /** The Search Fragment empowers the user to type in the town he wants to get the weather data for.
  * Then, the user can click on the button with the text "Search Town".
  *  */
-
 class SearchFragment : Fragment(R.layout.fragment_search) {
 
     //private val data = ArrayList<Town>()
@@ -32,15 +31,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     //Town(-weather) search with town-name and button click.
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        //get recycler view and set it to a val.
-        //val recyclerView = view.findViewById<RecyclerView>(R.id.searchRecyclerView)
-
-        //recyclerView.layoutManager = LinearLayoutManager(context)
-        //recyclerView.addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
-
-        //Connect recyclerView to the Adapter to fill it with the Data.
-        //recyclerView.adapter = adapter
 
         //Set the search Button so the User can Search for a Town.
         val searchTitleButton = view.findViewById<Button>(R.id.searchWeatherTownButton)
@@ -55,7 +45,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             //Then, the weather data for this town is saved to the database.
             //Then, the user is navigated to the weather activity.
             //there, the data is retrieved from the database and presented.
-
                 searchTown(searchTownText)
 
 
@@ -86,12 +75,15 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
        // }
    // }
 
-    // the get call is done to the openweathermap-API with the text from the user.
-    // In case the text matches a town that the openweathermap-API has data for
-    // the weather data for the town gets fetched.
-    // The data is converted from JSON to Kotlin Objects with the retrofit converter.
-    // Then we can access the data and save the town to the TownDatabase.
-    //Todo: prüfen, was für daten die wetter api sendet. wert von town.
+
+    /**
+     * the get call is done to the openweathermap-API with the text from the user.
+     * In case the text matches a town that the openweathermap-API has data for
+     * the weather data for the town gets fetched.
+     * The data is converted from JSON to Kotlin Objects with the retrofit converter.
+     *  Then we can access the data and save the town to the TownDatabase.
+     *
+     * */
     private fun searchTown(townName: String) {
 
        activity?.let { it ->
@@ -110,32 +102,13 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                    "cc5ef9e3576dc1e8bc30087dae5ee9ca"
                )
 
-               //val payload = response.search.toDomain()
-               //Test JSON Data.
-               //val wetter1 = dataNow.weather.toString()
-               //val wetter2 = dataNow.main.toString()
-               //val wetter3 = dataNow.wind.toString()
-               //The data for the next day.
-               //val wetter4 = dataNextWeek.list[3].main?.temp.toString()
-               //the data for next next day.
-               //val wetter10 = dataNextWeek.list[10].toString()
-
-               //val town = payload.search.map { return@map it.toDomain()}
-               //Log.d("Description and Icon:", "description and icon: $wetter1")
-               //Log.d("Temperature:", "Temperature: $wetter2")
-               //Log.d("wind:", "wind: $wetter3")
-               //Log.d("dataNext", "dataNext: $wetter10")
-
-
-               //The Weather Object Next Day is in a List so we need to access this List.
+               //The Weather Object (Next Day) is in a List so we need to access this List.
                val dataNextDay = dataNextWeek.list[3]
                //the data for next next day.
                val dataNextNextDay = dataNextWeek.list[10]
-               //data next day
-               //val dataNextDay =
-               //data next next day
-               //val data
 
+
+               //description next next day
                val wetterTraditionell = dataNextDay.weather[0].description.toString()
                //val wetter1 = dataNextDay.weather[1].description.toString()
                Log.d("Wetter traditionell", "Wetter traditionell: $wetterTraditionell")
@@ -166,8 +139,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                //to get a List. we dont need that 93%.
                //val dataResponse = payload.search.map { return@map it.toDomain()}
 
-               //Log.d("Data wetter:", "data wetter: $dataResponse")
-
                //val townDTO = TownDTO(
                //          keyID = 1,
                //          id = 1,
@@ -191,6 +162,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                    temperatureDayAfterNextDay = temperatureDayAfterNextDay,
                    windtempoDayAfterNextDay = windtempoDayAfterNextDay
                )
+
                //Check if the Town already is in the database.
                //If yes, delete the town and add it again cause the data
                //may have changed for the weather in the meantime.
@@ -202,10 +174,6 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                    }
                }
                townTrackerApplication.repository.insert(townNew)
-
-               //withContext(Dispatchers.Main){
-               //adapter.notifyDataSetChanged()
-               // }
 
                //Navigates to the weather activity.
                activity?.let {
@@ -221,7 +189,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                    it.runOnUiThread {
                        Toast.makeText(
                            requireContext(),
-                           "Please provide the valid Name for the Town.",
+                           getString(R.string.no_valid_town_name_message),
                            Toast.LENGTH_SHORT
                        ).show()
                    }
@@ -235,10 +203,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
 
     private fun formatWindtempo(windtempoString: String): String {
-        var windtempoNow = windtempoString + " meters per second."
+        var windtempoNow = windtempoString + getString(R.string.wind_metric_plural)
         // 1 meter.
         if (windtempoString == "1" || windtempoString == "1.0" || windtempoString == "1.00"){
-            windtempoNow = windtempoString + " meter per second."
+            windtempoNow = windtempoString + getString(R.string.wind_metric_singular)
         }
         return windtempoNow
 
@@ -251,10 +219,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private fun formatTemperature(temperatureKelvin: Double?): String {
         val temperatureNotCut = temperatureKelvin?.minus(273.15)
         val temperatureString = ((temperatureNotCut?.times(100.0) ?: 0.0) / 100.0).roundToInt().toString()
-        var temperature = temperatureString + " degrees Celsius."
+        var temperature = temperatureString + getString(R.string.temperature_metric_plural)
         // 1 degree.
         if (temperatureString == "1" || temperatureString == "-1"){
-            temperature = temperatureString + " degree Celsius."
+            temperature = temperatureString + getString(R.string.temperature_metric_singular)
         }
         return temperature
     }
