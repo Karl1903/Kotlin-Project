@@ -1,4 +1,4 @@
-package de.hdmstuttgart.wetter
+package de.hdmstuttgart.wetter.API
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

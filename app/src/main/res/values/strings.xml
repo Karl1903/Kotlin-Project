@@ -11,4 +11,10 @@
     <string name="new_search">New Search</string>
     <string name="trash_icon_description">delete the line..</string>
     <string name="date">Date</string>
+    <string name="wind_metric_singular"> meter per second.</string>
+    <string name="wind_metric_plural"> meters per second.</string>
+    <string name="temperature_metric_singular"> degree Celsius.</string>
+    <string name="temperature_metric_plural"> degrees Celsius.</string>
+    <string name="no_valid_town_name_message">Please provide the valid Name for the Town.</string>
+
 </resources>

@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import de.hdmstuttgart.wetter.API.WeatherApi
-import de.hdmstuttgart.wetter.Configuration
+import de.hdmstuttgart.wetter.API.Configuration
 import de.hdmstuttgart.wetter.R
 import de.hdmstuttgart.wetter.Town.Town
 import de.hdmstuttgart.wetter.TownTrackerApplication
@@ -20,7 +20,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Date
 import java.util.Locale
 
 

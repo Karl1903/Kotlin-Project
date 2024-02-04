@@ -1,4 +1,4 @@
-package de.hdmstuttgart.wetter
+package de.hdmstuttgart.wetter.API
 
 class Configuration {
 
