@@ -11,8 +11,6 @@
 
     <!-- cards -->
 
-    <!-- Location -->
-
     <View
         android:id="@+id/card1"
         android:layout_width="464dp"
@@ -45,6 +43,8 @@
         app:layout_constraintHorizontal_bias="0.523"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <!-- Location -->
 
     <TextView
         android:id="@+id/townNameTextView"
