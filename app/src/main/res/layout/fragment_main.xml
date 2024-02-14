@@ -13,7 +13,7 @@
         android:layout_height="54dp"
         android:backgroundTint="#D97BF0"
         android:onClick="onSearchTownClick"
-        android:text="@string/search_for_the_town"
+        android:text="@string/searchTownButton_text"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

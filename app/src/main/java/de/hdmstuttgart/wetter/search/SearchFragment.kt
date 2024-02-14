@@ -39,19 +39,23 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
             val searchTownText = searchTownEditText.text.toString()
 
 
-            //Search the town that fits to the text the user writes.
-            //Then, the weather data for this town is saved to the database.
-            //Then, the user is navigated to the weather activity.
-            //there, the data is retrieved from the database and presented.
+            //1. Search the town that fits to the text the user writes.
+            //2. the weather data for this town is saved to the database.
+            //3. the user is navigated to the weather activity.
+            //4. the data is retrieved from the database and presented.
                 searchTown(searchTownText)
 
 
         }
     }
 
-    //Todo: Delete this method when it is safe that we dont neet it.
-    //Todo: Right now the flow of the application doesn't need it
-    //Todo: cause it doesn't get a list of towns but just one town with the weather data for it.
+    //Todo: Write this method to display the List with Towns that fit to the Search text.
+    //Todo: so when the user writes "Le" he gets towns like "Lenchester", "Leclerec". all towns that start with "Le"
+    //Todo: the towns that the user searched for already have to get at the top of the List.
+    //Todo: Right now the flow of the application doesn't provide that.
+    //Todo: the flow doesn't get a list of towns but just one town with the weather data for it.
+    //Todo: That means that the Search prompt has to be exact like: "Lenchester"
+    //Todo: if the user writes "Le" and there is no town that is called exactly "Le" the search fails.
     //Town gets clicked, saved into the repository that saves the clicked towns.
     //The purpose of this is that the user has the list with the recent searches he did in the
     //Search Activity. So he can access the weather data for his/her favorite towns
@@ -187,7 +191,7 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
                    it.runOnUiThread {
                        Toast.makeText(
                            requireContext(),
-                           getString(R.string.no_valid_town_name_message),
+                           getString(R.string.no_valid_town_name_message_text),
                            Toast.LENGTH_SHORT
                        ).show()
                    }
@@ -201,10 +205,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
 
 
     private fun formatWindtempo(windtempoString: String): String {
-        var windtempoNow = windtempoString + getString(R.string.wind_metric_plural)
+        var windtempoNow = windtempoString + " " + getString(R.string.wind_metric_plural_text)
         // 1 meter.
         if (windtempoString == "1" || windtempoString == "1.0" || windtempoString == "1.00"){
-            windtempoNow = windtempoString + getString(R.string.wind_metric_singular)
+            windtempoNow = windtempoString + " " + getString(R.string.wind_metric_singular_text)
         }
         return windtempoNow
 
@@ -217,10 +221,10 @@ class SearchFragment : Fragment(R.layout.fragment_search) {
     private fun formatTemperature(temperatureKelvin: Double?): String {
         val temperatureNotCut = temperatureKelvin?.minus(273.15)
         val temperatureString = ((temperatureNotCut?.times(100.0) ?: 0.0) / 100.0).roundToInt().toString()
-        var temperature = temperatureString + getString(R.string.temperature_metric_plural)
+        var temperature = temperatureString + " " + getString(R.string.temperature_metric_plural_text)
         // 1 degree.
         if (temperatureString == "1" || temperatureString == "-1"){
-            temperature = temperatureString + getString(R.string.temperature_metric_singular)
+            temperature = temperatureString + " " + getString(R.string.temperature_metric_singular_text)
         }
         return temperature
     }

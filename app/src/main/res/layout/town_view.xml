@@ -51,7 +51,7 @@
         android:layout_width="24dp"
         android:layout_height="24dp"
         android:clickable="true"
-        android:contentDescription="@string/trash_icon_description"
+        android:contentDescription="@string/trash_icon_text"
         android:focusable="true"
         android:onClick="onTrashClick"
         android:src="@drawable/baseline_delete_24"

@@ -56,7 +56,7 @@ class WeatherTest {
             //Weather Fragment: Town-Name check: "@+id/townNameTextView"
 
             onView(withId(R.id.townNameTextView))
-                .check(matches(withText("Location: Lissabon")))
+                .check(matches(withText("Town Name: Lissabon")))
 
             //ActivityScenario.launch(MainActivity::class.java)
 
