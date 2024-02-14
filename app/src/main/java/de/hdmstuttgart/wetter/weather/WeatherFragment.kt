@@ -239,14 +239,14 @@ class WeatherFragment : Fragment() {
     private fun getIconResource(description: String): Int {
         // There are different PNG files for each weather condition.
         return when {
-            "rain" in description.lowercase(Locale.ROOT) -> R.drawable.rain
-            "clear" in description.lowercase(Locale.ROOT) -> R.drawable.sonnig
-            "cloud" in description.lowercase(Locale.ROOT) -> R.drawable.wolken
-            "sunny" in description.lowercase(Locale.ROOT) -> R.drawable.sonnig
-            "scattered" in description.lowercase(Locale.ROOT) -> R.drawable.teilweisewolken
-            "wind" in description.lowercase(Locale.ROOT) -> R.drawable.starkerwind
-            "tornado" in description.lowercase(Locale.ROOT) -> R.drawable.tornado
-            "storm" in description.lowercase(Locale.ROOT) -> R.drawable.storm
-            "snow" in description.lowercase(Locale.ROOT) -> R.drawable.schnee
-            "fog" in description.lowercase(Locale.ROOT) -> R.drawable.nebel
-            else -> R.drawable.teilweisewolken}}}
+            "rain" in description.lowercase(Locale.ROOT) -> R.drawable.rainy
+            "clear" in description.lowercase(Locale.ROOT) -> R.drawable.sun
+            "cloud" in description.lowercase(Locale.ROOT) -> R.drawable.clouds
+            "sunny" in description.lowercase(Locale.ROOT) -> R.drawable.sun
+            "scattered" in description.lowercase(Locale.ROOT) -> R.drawable.partlycloudy
+            "wind" in description.lowercase(Locale.ROOT) -> R.drawable.wind
+            "tornado" in description.lowercase(Locale.ROOT) -> R.drawable.hurricane
+            "storm" in description.lowercase(Locale.ROOT) -> R.drawable.thunder
+            "snow" in description.lowercase(Locale.ROOT) -> R.drawable.snow
+            "fog" in description.lowercase(Locale.ROOT) -> R.drawable.fog
+            else -> R.drawable.partlycloudy}}}
