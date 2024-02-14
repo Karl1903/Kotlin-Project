@@ -52,7 +52,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:textColor="@color/white"
-        android:text="@string/cityName"
+        android:text="@string/townName_text"
         android:textSize="23dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.052"
@@ -63,9 +63,10 @@
         android:id="@+id/descriptionTextViewNow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+              
         android:layout_marginTop="20dp"
-        android:text="@string/description"
         android:textColor="@color/white"
+        android:text="@string/description_text"
         android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.047"
@@ -76,10 +77,13 @@
         android:id="@+id/dateTextViewNow"
         android:layout_width="154dp"
         android:layout_height="18dp"
+
         android:layout_marginTop="28dp"
-        android:text="@string/date"
+
         android:textColor="@color/white"
         android:textSize="16dp"
+        android:text="@string/date_text"
+              
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.062"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,8 +94,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/wind_tempo"
+
         android:textColor="@color/white"
+
+        android:text="@string/wind_tempo_text"
+
         android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.047"
@@ -103,8 +110,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/temperature"
+              
         android:textColor="@color/white"
+        android:text="@string/temperature_text"
         android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.048"
@@ -116,7 +124,7 @@
         android:layout_width="125dp"
         android:layout_height="116dp"
         android:layout_marginTop="8dp"
-        android:contentDescription="picture of the description. sun, rain etc."
+        android:contentDescription="@string/description_picture_alternative_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -143,7 +151,7 @@
         android:layout_height="85dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="12dp"
-        android:contentDescription="picture of the weather description. sun, rain etc."
+        android:contentDescription="@string/description_picture_alternative_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialButton" />
 
@@ -167,7 +175,7 @@
         android:layout_height="85dp"
         android:layout_marginTop="104dp"
         android:layout_marginEnd="12dp"
-        android:contentDescription="picture of the weather description. sun, rain etc."
+        android:contentDescription="@string/description_picture_alternative_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iconImageViewNextDay" />
 
@@ -177,8 +185,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="NavigateToMainFragment"
+
         android:backgroundTint="#D97BF0"
-        android:text="@string/new_search"
+
+        android:text="@string/newSearchButton_text"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.902"
@@ -193,7 +203,7 @@
         android:layout_marginStart="16dp"
         android:textColor="@color/white"
         android:layout_marginTop="8dp"
-        android:text="@string/wind_tempo"
+        android:text="@string/wind_tempo_text"
         android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/temperatureTextViewDayAfterNextDay" />
@@ -203,9 +213,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+
         android:layout_marginTop="20dp"
-        android:text="@string/description"
+        
         android:textColor="@color/white"
+        android:text="@string/description_text"
+
         android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateTextViewDayAfterNextDay" />
@@ -217,7 +230,7 @@
         android:layout_marginStart="16dp"
         android:textColor="@color/white"
         android:layout_marginTop="8dp"
-        android:text="@string/temperature"
+        android:text="@string/temperature_text"
         android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descriptionTextViewDayAfterNextDay" />
@@ -226,9 +239,12 @@
         android:id="@+id/dateTextViewDayAfterNextDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/date"
+    
         android:textColor="@color/white"
         android:textSize="16dp"
+
+        android:text="@string/date_text"
+   
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.041"
@@ -244,8 +260,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="12dp"
+
         android:textColor="@color/white"
-        android:text="@string/wind_tempo"
+
+
+        android:text="@string/wind_tempo_text"
+
         android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/temperatureTextViewNextDay" />
@@ -257,7 +277,7 @@
         android:layout_marginStart="16dp"
         android:textColor="@color/white"
         android:layout_marginTop="8dp"
-        android:text="@string/temperature"
+        android:text="@string/temperature_text"
         android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descriptionTextViewNextDay" />
@@ -267,9 +287,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+              
         android:layout_marginTop="20dp"
-        android:text="@string/description"
         android:textColor="@color/white"
+        android:text="@string/description_text"
+
         android:textSize="14dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dateTextViewNextDay" />
@@ -278,9 +300,14 @@
         android:id="@+id/dateTextViewNextDay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/date"
+
+   
         android:textColor="@color/white"
         android:textSize="16dp"
+
+        android:text="@string/date_text"
+   
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.041"

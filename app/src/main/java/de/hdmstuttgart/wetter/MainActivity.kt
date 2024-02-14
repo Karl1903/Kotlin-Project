@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import de.hdmstuttgart.wetter.search.SearchActivity
 
 /** With the start of the application the user gets into the Screen of the Main Activity.
- * There is one button with the text "Search Weather for Town".
+ * There is one button with the text: Search Weather for Town.
  * The Button click navigates into the Search Activity.
  * */
 class MainActivity : AppCompatActivity() {

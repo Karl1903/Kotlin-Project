@@ -1,6 +1,7 @@
 package de.hdmstuttgart.wetter
 
 import android.app.Application
+import de.hdmstuttgart.wetter.API.Configuration
 import de.hdmstuttgart.wetter.API.WeatherApi
 import de.hdmstuttgart.wetter.Town.TownDatabase
 import de.hdmstuttgart.wetter.Town.TownRepository

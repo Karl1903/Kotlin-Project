@@ -10,8 +10,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
+import de.hdmstuttgart.wetter.API.Configuration
 import de.hdmstuttgart.wetter.API.WeatherApi
-import de.hdmstuttgart.wetter.Configuration
 import de.hdmstuttgart.wetter.R
 import de.hdmstuttgart.wetter.Town.Town
 import de.hdmstuttgart.wetter.TownTrackerApplication
@@ -20,7 +20,6 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Date
 import java.util.Locale
 
 
@@ -156,7 +155,7 @@ class WeatherFragment : Fragment() {
     //        }
     //}
 
-    //the weather data was get in the search request,
+    //the weather data was retrieved with the search request,
     //now we just need to get it from the local storage to show it in the weather fragment.
     private fun loadWeatherData(townName: String): Town {
         var town = Town(key = 0,
@@ -192,11 +191,11 @@ class WeatherFragment : Fragment() {
 
     private fun updateUI(town: Town) {
         val dateNow = addTimeToTheDate(0)
-        townNameTextView.text = "Location: ${town.name}"
-        dateTextViewNow.text = "Date: $dateNow"
-        descriptionTextViewNow.text = "Weather description: ${town.descriptionNow}"
-        temperatureTextViewNow.text = "Temperature: ${town.temperatureNow}"
-        windtempoTextViewNow.text = "Wind tempo: ${town.windtempoNow}"
+        townNameTextView.text = getString(R.string.townName_text) + " " + town.name
+        dateTextViewNow.text = getString(R.string.date_text) + " " + dateNow
+        descriptionTextViewNow.text = getString(R.string.description_text) + " " + town.descriptionNow
+        temperatureTextViewNow.text = getString(R.string.temperature_text) + " " + town.temperatureNow
+        windtempoTextViewNow.text = getString(R.string.wind_tempo_text) + " " + town.windtempoNow
         // get the picture with Glide based on the description.
         val iconResource = getIconResource(town.descriptionNow)
         Glide.with(requireContext())
@@ -205,10 +204,10 @@ class WeatherFragment : Fragment() {
 
         //Next day data:
         val dateNextDay = addTimeToTheDate(24)
-        dateTextViewNextDay.text = "Date: $dateNextDay"
-        descriptionTextViewNextDay.text = "Weather description: ${town.descriptionNextDay}"
-        temperatureTextViewNextDay.text = "Temperature: ${town.temperatureNextDay}"
-        windtempoTextViewNextDay.text = "Wind tempo: ${town.windtempoNextDay}"
+        dateTextViewNextDay.text = getString(R.string.date_text) + " " + dateNextDay
+        descriptionTextViewNextDay.text = getString(R.string.description_text) + " " + town.descriptionNextDay
+        temperatureTextViewNextDay.text = getString(R.string.temperature_text) + " " + town.temperatureNextDay
+        windtempoTextViewNextDay.text = getString(R.string.wind_tempo_text) + " " + town.windtempoNextDay
         // get the picture with Glide based on the description.
         val iconResourceNextDay = getIconResource(town.descriptionNextDay)
         Glide.with(requireContext())
@@ -217,10 +216,10 @@ class WeatherFragment : Fragment() {
 
         //Day after next day data:
         val dateDayAfterNextDay = addTimeToTheDate(48)
-        dateTextViewDayAfterNextDay.text = "Date: $dateDayAfterNextDay"
-        descriptionTextViewDayAfterNextDay.text = "Weather description: ${town.descriptionDayAfterNextDay}"
-        temperatureTextViewDayAfterNextDay.text = "Temperature: ${town.temperatureDayAfterNextDay}"
-        windtempoTextViewDayAfterNextDay.text = "Wind tempo: ${town.windtempoDayAfterNextDay}"
+        dateTextViewDayAfterNextDay.text = getString(R.string.date_text) + " " + dateDayAfterNextDay
+        descriptionTextViewDayAfterNextDay.text = getString(R.string.description_text) + " " + town.descriptionDayAfterNextDay
+        temperatureTextViewDayAfterNextDay.text = getString(R.string.temperature_text) + " " + town.temperatureDayAfterNextDay
+        windtempoTextViewDayAfterNextDay.text = getString(R.string.wind_tempo_text) + " " + town.windtempoDayAfterNextDay
         // get the picture with Glide based on the description.
         val iconResourceDayAfterNextDay = getIconResource(town.descriptionDayAfterNextDay)
         Glide.with(requireContext())
