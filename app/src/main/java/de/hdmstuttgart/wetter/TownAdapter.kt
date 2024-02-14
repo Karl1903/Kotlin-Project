@@ -56,7 +56,8 @@ interface TrashClickListener {
         //todo: What we could do here is an image that depends on the description
         //todo: if the weather description is "sunny" then we take the sun pic.
         //todo: description = rain. then rain.
-        //todo: we got that in the Weather Description now. but it can be great in the Main Fragment List too.
+        //todo: we got that in the Weather Description now.
+        //todo:but it can be great in the Main Fragment List too.
         //val posterImageView: ImageView = itemView.findViewById(R.id.posterImageView)
     }
 }

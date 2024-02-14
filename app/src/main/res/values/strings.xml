@@ -8,7 +8,7 @@
     <string name="description_text">Description: </string>
     <string name="wind_tempo_text">wind-tempo: </string>
     <string name="newSearchButton_text">New Search</string>
-    <string name="trash_icon_text">delete the line..</string>
+    <string name="trash_icon_text">Delete the Line..</string>
     <string name="date_text">Date: </string>
     <string name="wind_metric_singular_text"> meter per second.</string>
     <string name="wind_metric_plural_text"> meters per second.</string>
